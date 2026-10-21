@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Polígono Thor · Gobierno</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#151515}
+a{color:#f2efe7}a:hover{color:#ff8a70}
+.d{font-family:'Archivo',sans-serif;font-stretch:118%;font-weight:800;letter-spacing:-0.035em;line-height:0.94;text-wrap:balance}
+.wrap{max-width:1360px;margin:0 auto;padding-left:40px;padding-right:40px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 26px;background:#f2efe7;color:#151515;font-weight:600;font-size:17px;text-decoration:none;border:0;font-family:inherit;cursor:pointer;transition:background-color .15s ease;touch-action:manipulation}
+.btn:hover{background:#ffffff;color:#151515}
+.btn-red{background:#c8361b;color:#ffffff}.btn-red:hover{background:#a92c15;color:#ffffff}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #ff8a70;outline-offset:3px}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld label{font-size:14px;font-weight:600;color:#151515}
+.fld input,.fld select,.fld textarea{font:inherit;font-size:17px;min-height:54px;padding:0 14px;border:0;background:#ffffff;color:#151515;box-sizing:border-box;width:100%;box-shadow:inset 0 0 0 1.5px #cfc8b8}
+.fld textarea{min-height:120px;padding:12px 14px;resize:vertical}
+.nav-links a{text-decoration:none}
+@media (max-width:900px){
+.wrap{padding-left:16px;padding-right:16px}
+.g12{grid-template-columns:minmax(0,1fr) !important}
+.g12 > *{grid-column:auto !important}
+.nav-links{display:none !important}
+.c3{grid-template-columns:minmax(0,1fr) !important}
+.f2{grid-template-columns:minmax(0,1fr) !important}
+.f2 > *{grid-column:auto !important}
+}
+</style>
+</head>
+<body>
+<div role="note" style="background:#151515;color:#f2efe7;font:500 14px/1.4 Archivo,system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;text-align:center"><span>Prototipo del rediseño de Polígono Thor.</span><span style="color:#ff8a70;font-weight:700">Los pagos y formularios son simulados: no se cobra nada.</span></div>
+<div id="app"></div>
+<template id="tpl">
+
+<div style="background: #151515; color: #f2efe7; font-family: 'Archivo', sans-serif; font-size: 18px; line-height: 1.55;">
+
+<header class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 22px; padding-bottom: 22px;">
+<a href="inicio.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;" aria-label="Polígono de Tiro Thor, inicio">
+<svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#f2efe7" stroke-width="3"></circle><circle cx="50" cy="50" r="32" fill="none" stroke="#f2efe7" stroke-width="3"></circle><circle cx="50" cy="50" r="18" fill="#f2efe7"></circle><circle cx="50" cy="50" r="6" fill="#c8361b"></circle></svg>
+<span class="d" style="font-size: 21px;" translate="no">Polígono Thor</span>
+<span style="font-size: 14px; color: #cfcabe; padding-left: 12px; box-shadow: inset 2px 0 0 #3d3a34;">Canal institucional</span>
+</a>
+<nav aria-label="Principal" style="display: flex; align-items: center; gap: 32px;">
+<div class="nav-links" style="display: flex; gap: 26px; font-size: 16px; font-weight: 500;">
+<a href="#servicios">Servicios</a>
+<a href="#cumplimiento">Cumplimiento</a>
+<a href="inicio.html">Sitio para personas</a>
+</div>
+<a class="btn btn-red" href="#cotizacion" style="min-height: 46px; padding: 0 22px; font-size: 16px;">Solicitar cotización</a>
+</nav>
+</header>
+
+<main>
+<section class="wrap g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: end; padding-top: 72px; padding-bottom: 104px;">
+<div style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 28px; align-items: flex-start;">
+<h1 class="d" style="margin: 0; font-size: clamp(56px, 6.8vw, 108px);">Entrenamiento táctico para el Estado</h1>
+<p style="margin: 0; max-width: 640px; font-size: 21px;">Líneas de tiro, simulación avanzada y programas a la medida para entidades gubernamentales, fuerzas armadas y organismos del Estado.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px;"><a class="btn btn-red" href="#cotizacion">Solicitar cotización oficial</a><a class="btn" href="#servicios">Ver servicios</a></div>
+</div>
+<div style="grid-column: 10 / span 3; display: flex; flex-direction: column; gap: 4px;">
+<p class="d" style="margin: 0; font-size: 96px; color: #c8361b;">&lt;24 h</p>
+<p style="margin: 0; font-size: 17px; color: #cfcabe;">hábiles para responder cotizaciones y requerimientos técnicos.</p>
+</div>
+</section>
+
+<section id="servicios" style="background: #f2efe7; color: #151515;">
+<div class="wrap" style="padding-top: 112px; padding-bottom: 112px;">
+<h2 class="d" style="margin: 0 0 48px; font-size: clamp(44px, 4.6vw, 72px);">Servicios disponibles</h2>
+<div class="c3" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px;">
+<article style="background: #ffffff; padding: 36px; display: flex; flex-direction: column; gap: 14px;">
+<svg width="64" height="64" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#151515" stroke-width="3"></circle><circle cx="50" cy="50" r="32" fill="none" stroke="#151515" stroke-width="3"></circle><circle cx="50" cy="50" r="18" fill="#151515"></circle><circle cx="50" cy="50" r="6" fill="#c8361b"></circle></svg>
+<h3 class="d" style="margin: 0; font-size: 36px;">Reserva de líneas de tiro</h3>
+<p style="margin: 0;">Espacios para prácticas oficiales y calificación del armamento de dotación, en Bogotá y Suesca.</p>
+</article>
+<article style="background: #ffffff; padding: 36px; display: flex; flex-direction: column; gap: 14px;">
+<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="10" width="56" height="36" fill="#151515"></rect><circle cx="32" cy="28" r="10" fill="none" stroke="#f2efe7" stroke-width="2"></circle><path d="M32 14v6M32 36v6M18 28h6M40 28h6" stroke="#c8361b" stroke-width="3"></path><rect x="24" y="50" width="16" height="6" fill="#151515"></rect></svg>
+<h3 class="d" style="margin: 0; font-size: 36px;">Simulador táctico avanzado</h3>
+<p style="margin: 0;">Escenarios críticos, decisión bajo estrés y auditoría de tiro digital, sin munición viva.</p>
+</article>
+<article style="background: #ffffff; padding: 36px; display: flex; flex-direction: column; gap: 14px;">
+<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="6" width="48" height="52" fill="#151515"></rect><rect x="16" y="16" width="32" height="4" fill="#f2efe7"></rect><rect x="16" y="26" width="24" height="4" fill="#f2efe7"></rect><rect x="16" y="36" width="28" height="4" fill="#f2efe7"></rect><rect x="16" y="46" width="12" height="4" fill="#c8361b"></rect></svg>
+<h3 class="d" style="margin: 0; font-size: 36px;">Programas a la medida</h3>
+<p style="margin: 0;">Tiro defensivo y operativo para escoltas, policía y fuerzas de seguridad.</p>
+</article>
+</div>
+</div>
+</section>
+
+<section id="cumplimiento" class="wrap" style="padding-top: 140px;">
+<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px;">
+<h2 class="d" style="grid-column: 1 / span 5; margin: 0; font-size: clamp(44px, 4.6vw, 72px);">Diseñado para el Estado</h2>
+<div style="grid-column: 7 / span 6; display: flex; flex-direction: column; gap: 36px;">
+<div><h3 style="margin: 0 0 6px; font-size: 22px; font-weight: 700;">Confidencialidad operativa</h3><p style="margin: 0; color: #cfcabe;">Protocolos para la información, la identidad del personal en instrucción y la logística.</p></div>
+<div><h3 style="margin: 0 0 6px; font-size: 22px; font-weight: 700;">Homologación y cumplimiento</h3><p style="margin: 0; color: #cfcabe;">Listos para licitaciones y compras directas: RUT, facturación electrónica y certificados al día.</p></div>
+<div><h3 style="margin: 0 0 6px; font-size: 22px; font-weight: 700;">Infraestructura propia</h3><p style="margin: 0; color: #cfcabe;">Polígono físico en Bogotá y Suesca, y simulación digital de alta fidelidad.</p></div>
+<div><h3 style="margin: 0 0 6px; font-size: 22px; font-weight: 700;">Cero fricción burocrática</h3><p style="margin: 0; color: #cfcabe;">Recibimos RFI, RFQ, pliegos de condiciones y licitaciones. Un asesor responde la cotización formal en máximo 24 horas hábiles.</p></div>
+</div>
+</div>
+</section>
+
+<section id="cotizacion" class="wrap" style="padding-top: 140px; padding-bottom: 120px;">
+<form class="f2" style="background: #f2efe7; color: #151515; padding: 48px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 20px;" aria-labelledby="cot-h">
+<h2 id="cot-h" class="d" style="grid-column: span 2; margin: 0 0 8px; font-size: 52px;">Solicitar cotización oficial</h2>
+<div class="fld"><label for="g1">Nombre completo</label><input id="g1" name="name" type="text" autocomplete="name"></div>
+<div class="fld"><label for="g2">Cargo o rango</label><input id="g2" name="rank" type="text" autocomplete="organization-title"></div>
+<div class="fld"><label for="g3">Entidad</label><input id="g3" name="org" type="text" autocomplete="organization"></div>
+<div class="fld"><label for="g4">Correo institucional</label><input id="g4" name="email" type="email" autocomplete="email" spellcheck="false" placeholder="nombre@entidad.gov.co…"></div>
+<div class="fld"><label for="g5">Teléfono o extensión</label><input id="g5" name="tel" type="tel" autocomplete="tel"></div>
+<div class="fld"><label for="g6">Tipo de requerimiento</label><select id="g6" name="type"><option>RFI</option><option>RFQ</option><option>Pliego de condiciones</option><option>Licitación</option></select></div>
+<div class="fld"><label for="g7">Número estimado de efectivos (opcional)</label><input id="g7" name="headcount" type="number" min="1" inputmode="numeric"></div>
+<div class="fld" style="grid-column: span 2;"><label for="g8">Detalles técnicos (opcional)</label><textarea id="g8" name="details"></textarea></div>
+<label style="grid-column: span 2; display: flex; gap: 12px; align-items: flex-start; font-size: 16px; cursor: pointer;"><input type="checkbox" name="privacy" style="width: 22px; height: 22px; margin: 2px 0 0; accent-color: #c8361b;">Acepto la política de confidencialidad. Solo se admiten correos institucionales.</label>
+<div style="grid-column: span 2; display: flex; flex-wrap: wrap; gap: 16px; align-items: center;"><button type="button" class="btn btn-red">Enviar requerimiento</button><a href="https://wa.me/573202527842" style="color: #151515; font-weight: 600;">O escríbenos por WhatsApp</a></div>
+</form>
+</section>
+</main>
+
+<footer>
+<div class="wrap" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; padding-top: 32px; padding-bottom: 40px; font-size: 15px; color: #cfcabe;">
+<span>© 2026 Polígono de Tiro Thor · Autorizado y vigilado por el DCCAE</span>
+<span style="display: flex; flex-wrap: wrap; gap: 20px;"><a href="pagos.html#politicas">Políticas</a><a href="inicio.html">Inicio</a></span>
+</div>
+</footer>
+</div>
+</template>
+<script>window.__DC_PROPS={};
+window.__DC_DEFINE=function(DCLogic){
+
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+
+return Component;};</script>
+<script>
+(function () {
+  var tpl = document.getElementById('tpl');
+  var app = document.getElementById('app');
+  var HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
+  var WHOLE = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+
+  function DCLogic(props) { this.props = props || {}; this.state = {}; }
+  DCLogic.prototype.setState = function (p) {
+    var next = typeof p === 'function' ? p(this.state, this.props) : p;
+    this.state = Object.assign({}, this.state, next);
+    schedule();
+  };
+  DCLogic.prototype.forceUpdate = function () { schedule(); };
+
+  var Component = window.__DC_DEFINE(DCLogic);
+  var comp = new Component(window.__DC_PROPS || {});
+  if (!comp.state) comp.state = {};
+
+  function lookup(path, scopes) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (path === 'null') return null;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    if (/^'.*'$|^".*"$/.test(path)) return path.slice(1, -1);
+    var parts = path.split('.');
+    for (var i = 0; i < scopes.length; i++) {
+      var s = scopes[i];
+      if (s && Object.prototype.hasOwnProperty.call(s, parts[0])) {
+        var v = s[parts[0]];
+        for (var j = 1; j < parts.length; j++) { if (v == null) return undefined; v = v[parts[j]]; }
+        return v;
+      }
+    }
+    return undefined;
+  }
+  function interp(str, scopes) {
+    return str.replace(HOLE, function (_, p) { var v = lookup(p, scopes); return v == null ? '' : String(v); });
+  }
+
+  function renderNodes(parent, scopes, out) {
+    var kids = parent.childNodes;
+    for (var i = 0; i < kids.length; i++) renderNode(kids[i], scopes, out);
+  }
+
+  function renderNode(node, scopes, out) {
+    if (node.nodeType === 3) {
+      var t = node.nodeValue;
+      out.push(document.createTextNode(t.indexOf('{{') >= 0 ? interp(t, scopes) : t));
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    var tag = node.localName;
+    if (tag === 'sc-if') {
+      var raw = node.getAttribute('value') || '';
+      var m = raw.match(WHOLE);
+      var val = m ? lookup(m[1], scopes) : raw;
+      if (val && val !== 'false') renderNodes(node, scopes, out);
+      return;
+    }
+    if (tag === 'sc-for') {
+      var lm = (node.getAttribute('list') || '').match(WHOLE);
+      var list = lm ? lookup(lm[1], scopes) : [];
+      var as = node.getAttribute('as') || 'item';
+      (list || []).forEach(function (item, idx) {
+        var sc = {}; sc[as] = item; sc.$index = idx;
+        renderNodes(node, [sc].concat(scopes), out);
+      });
+      return;
+    }
+    var el = node.namespaceURI === 'http://www.w3.org/1999/xhtml'
+      ? document.createElement(tag)
+      : document.createElementNS(node.namespaceURI, tag);
+    for (var a = 0; a < node.attributes.length; a++) {
+      var at = node.attributes[a];
+      var name = at.name, value = at.value;
+      if (name.indexOf('hint-') === 0) continue;
+      var whole = value.match(WHOLE);
+      if (/^on[a-z]+$/.test(name)) {
+        var fn = whole ? lookup(whole[1], scopes) : null;
+        if (typeof fn === 'function') {
+          var ev = name.slice(2);
+          if (ev === 'change' && (tag === 'input' || tag === 'textarea')) ev = 'input';
+          el.addEventListener(ev, fn);
+        }
+        continue;
+      }
+      if (whole) {
+        var v = lookup(whole[1], scopes);
+        if (v === false || v == null) {
+          if (name.indexOf('aria-') === 0 && v === false) el.setAttribute(name, 'false');
+          continue;
+        }
+        el.setAttribute(name, v === true ? (name.indexOf('aria-') === 0 ? 'true' : '') : String(v));
+      } else if (value.indexOf('{{') >= 0) {
+        el.setAttribute(name, interp(value, scopes));
+      } else {
+        el.setAttribute(name, value);
+      }
+    }
+    var children = [];
+    renderNodes(node, scopes, children);
+    for (var c = 0; c < children.length; c++) el.appendChild(children[c]);
+    if (tag === 'input' && el.hasAttribute('value')) el.value = el.getAttribute('value');
+    out.push(el);
+  }
+
+  var pending = false, first = true;
+  function schedule() {
+    if (pending) return;
+    pending = true;
+    Promise.resolve().then(function () { pending = false; render(); });
+  }
+
+  function render() {
+    var active = document.activeElement;
+    var activeId = active && active.id && app.contains(active) ? active.id : null;
+    var sel = null;
+    try { if (activeId && typeof active.selectionStart === 'number') sel = active.value.length - active.selectionStart; } catch (e) {}
+    var openDetails = Array.prototype.map.call(app.querySelectorAll('details'), function (d) { return d.open; });
+
+    var vals = comp.renderVals ? comp.renderVals() : {};
+    var out = [];
+    renderNodes(tpl.content, [vals], out);
+    app.replaceChildren.apply(app, out);
+
+    var ds = app.querySelectorAll('details');
+    if (ds.length === openDetails.length) ds.forEach(function (d, i) { if (openDetails[i]) d.open = true; });
+    if (activeId) {
+      var n = document.getElementById(activeId);
+      if (n) {
+        n.focus({ preventScroll: true });
+        try { if (sel != null && typeof n.setSelectionRange === 'function') { var p = n.value.length - sel; n.setSelectionRange(p, p); } } catch (e) {}
+      }
+    }
+    app.querySelectorAll('form').forEach(function (f) { f.addEventListener('submit', function (e) { e.preventDefault(); }); });
+    if (first) {
+      first = false;
+      if (comp.componentDidMount) try { comp.componentDidMount(); } catch (e) {}
+      if (location.hash && location.hash.length > 1) {
+        var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target) target.scrollIntoView();
+      }
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    var t = id && document.getElementById(id);
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Polígono Thor · Reserva y pago</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f2efe7}
+a{color:#151515}a:hover{color:#c8361b}
+.d{font-family:'Archivo',sans-serif;font-stretch:118%;font-weight:800;letter-spacing:-0.035em;line-height:0.94;text-wrap:balance}
+.wrap{max-width:1360px;margin:0 auto;padding-left:40px;padding-right:40px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;background:#151515;color:#f2efe7;font-weight:600;font-size:17px;text-decoration:none;border:0;font-family:inherit;cursor:pointer;transition:background-color .15s ease;touch-action:manipulation}
+.btn:hover{background:#c8361b;color:#ffffff}
+.btn-red{background:#c8361b;color:#ffffff}.btn-red:hover{background:#151515;color:#f2efe7}
+.btn-quiet{background:transparent;color:#151515;padding:0 8px;text-decoration:underline;text-underline-offset:5px}
+.btn-quiet:hover{background:transparent;color:#c8361b}
+.btn[aria-disabled="true"]{background:#cfc8b8;color:#57534b;pointer-events:none}
+.opt{font:inherit;cursor:pointer;border:0;text-align:left;transition:background-color .15s ease, color .15s ease;touch-action:manipulation}
+.opt:disabled{cursor:not-allowed}
+.opt:focus-visible,.btn:focus-visible,a:focus-visible{outline:3px solid #c8361b;outline-offset:3px}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld label{font-size:14px;font-weight:600}
+.fld input,.fld select{font:inherit;font-size:17px;min-height:54px;padding:0 14px;border:0;background:#ffffff;color:#151515;box-sizing:border-box;width:100%;box-shadow:inset 0 0 0 1.5px #cfc8b8}
+.fld input:focus-visible,.fld select:focus-visible{outline:3px solid #c8361b;outline-offset:0}
+.leg{margin:0 0 20px;padding:0;font-family:'Archivo',sans-serif;font-stretch:118%;font-weight:800;letter-spacing:-0.03em;font-size:34px;line-height:1}
+@media (max-width:900px){
+.wrap{padding-left:16px;padding-right:16px}
+.cols{grid-template-columns:minmax(0,1fr) !important}
+.g2{grid-template-columns:minmax(0,1fr) !important}
+.summary{position:static !important}
+.steps span.lbl{display:none}
+}
+</style>
+</head>
+<body>
+<div role="note" style="background:#151515;color:#f2efe7;font:500 14px/1.4 Archivo,system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;text-align:center"><span>Prototipo del rediseño de Polígono Thor.</span><span style="color:#ff8a70;font-weight:700">Los pagos y formularios son simulados: no se cobra nada.</span></div>
+<div id="app"></div>
+<template id="tpl">
+
+<div style="background: #f2efe7; color: #151515; font-family: 'Archivo', sans-serif; font-size: 17px; line-height: 1.55; min-height: 100vh;">
+
+<header class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 22px; padding-bottom: 22px;">
+<a href="inicio.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;" aria-label="Polígono de Tiro Thor, volver al inicio">
+<svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#151515" stroke-width="3"></circle><circle cx="50" cy="50" r="32" fill="none" stroke="#151515" stroke-width="3"></circle><circle cx="50" cy="50" r="18" fill="#151515"></circle><circle cx="50" cy="50" r="6" fill="#c8361b"></circle></svg>
+<span class="d" style="font-size: 21px;" translate="no">Polígono Thor</span>
+</a>
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 15px; color: #3d3a34;">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2" aria-hidden="true"><rect x="5" y="10" width="14" height="10"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+Pago seguro con GlobalPay Redeban
+</p>
+</header>
+
+<main class="wrap" style="padding-top: 24px; padding-bottom: 120px;">
+<h1 class="d" style="margin: 0 0 32px; font-size: clamp(48px, 5vw, 80px);">Reserva y paga tu lección</h1>
+
+<ol class="steps" aria-label="Pasos de la reserva" style="margin: 0 0 48px; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px;">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="5">
+<li aria-current="{{s.current}}" style="display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: {{s.bg}}; color: {{s.fg}}; font-size: 15px; font-weight: 600;">
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; flex-shrink: 0; font-size: 14px; font-weight: 800; background: {{s.dotBg}}; color: {{s.dotFg}};">{{s.mark}}</span>
+<span class="lbl">{{s.label}}</span>
+</li>
+</sc-for>
+</ol>
+
+<div class="cols" style="display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 48px; align-items: start;">
+<div style="display: flex; flex-direction: column; gap: 48px;">
+
+<sc-if value="{{is1}}" hint-placeholder-val="{{true}}">
+<fieldset style="border: 0; margin: 0; padding: 0;">
+<legend class="leg">¿Qué lección quieres?</legend>
+<div class="g2" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px;">
+<sc-for list="{{services}}" as="s" hint-placeholder-count="8">
+<button type="button" class="opt" onClick="{{s.pick}}" aria-pressed="{{s.on}}" style="display: flex; flex-direction: column; gap: 4px; padding: 20px 22px; min-height: 128px; background: {{s.bg}}; color: {{s.fg}};">
+<span style="display: flex; justify-content: space-between; gap: 12px; align-items: baseline;"><span style="font-size: 20px; font-weight: 700; line-height: 1.2;">{{s.name}}</span><span style="font-size: 13px; font-weight: 700;">{{s.tag}}</span></span>
+<span style="font-size: 15px;">{{s.note}}</span>
+<span style="margin-top: auto; font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums;">{{s.priceLabel}}</span>
+</button>
+</sc-for>
+</div>
+</fieldset>
+<fieldset style="border: 0; margin: 0; padding: 0;">
+<legend class="leg">Complementos</legend>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<button type="button" class="opt" onClick="{{toggleCert}}" aria-pressed="{{certOn}}" style="display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 20px 22px; background: {{certBg}}; color: {{certFg}};">
+<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: {{certBox}}; color: #ffffff; font-weight: 800;">{{certMark}}</span>
+<span><span style="display: block; font-size: 19px; font-weight: 700;">Certificado DCCAE</span><span style="display: block; font-size: 15px;">Aval oficial, diploma físico y certificado digital con QR. Por persona.</span></span>
+<span style="font-size: 19px; font-weight: 800; font-variant-numeric: tabular-nums;">$55.900</span>
+</button>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 22px; background: #e7e2d6;">
+<span><span style="display: block; font-size: 19px; font-weight: 700;">Cartuchos extra</span><span style="display: block; font-size: 15px; color: #3d3a34;">Munición INDUMIL, $16.900 cada uno.</span></span>
+<div style="display: flex; align-items: center; gap: 4px;">
+<button type="button" class="opt" onClick="{{lessAmmo}}" aria-label="Un cartucho menos" style="width: 48px; height: 48px; font-size: 24px; text-align: center; background: #151515; color: #f2efe7;">−</button>
+<output style="min-width: 48px; text-align: center; font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums;">{{ammo}}</output>
+<button type="button" class="opt" onClick="{{moreAmmo}}" aria-label="Un cartucho más" style="width: 48px; height: 48px; font-size: 24px; text-align: center; background: #151515; color: #f2efe7;">+</button>
+</div>
+</div>
+</div>
+</fieldset>
+</sc-if>
+
+<sc-if value="{{is2}}" hint-placeholder-val="{{false}}">
+<fieldset style="border: 0; margin: 0; padding: 0;">
+<legend class="leg">Sede</legend>
+<div class="g2" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px;">
+<sc-for list="{{sedes}}" as="d" hint-placeholder-count="2">
+<button type="button" class="opt" onClick="{{d.pick}}" aria-pressed="{{d.on}}" style="display: flex; flex-direction: column; gap: 2px; padding: 18px 22px; min-height: 96px; background: {{d.bg}}; color: {{d.fg}};">
+<span style="font-size: 20px; font-weight: 700;">{{d.name}}</span>
+<span style="font-size: 15px;">{{d.note}}</span>
+</button>
+</sc-for>
+</div>
+</fieldset>
+<fieldset style="border: 0; margin: 0; padding: 0;">
+<legend class="leg">Fecha</legend>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px;">
+<sc-for list="{{days}}" as="day" hint-placeholder-count="14">
+<button type="button" class="opt" onClick="{{day.pick}}" aria-pressed="{{day.on}}" aria-label="{{day.label}}" disabled="{{day.off}}" style="display: flex; flex-direction: column; align-items: center; padding: 10px 2px; min-height: 76px; text-align: center; background: {{day.bg}}; color: {{day.fg}};">
+<span style="font-size: 13px; font-weight: 600;">{{day.dow}}</span>
+<span class="d" style="font-size: 30px;">{{day.num}}</span>
+</button>
+</sc-for>
+</div>
+<sc-if value="{{suescaNote}}" hint-placeholder-val="{{false}}"><p style="margin: 12px 0 0; font-size: 15px; color: #57534b;">Suesca abre sábados y domingos, de 9:00 a. m. a 4:00 p. m.</p></sc-if>
+</fieldset>
+<fieldset style="border: 0; margin: 0; padding: 0;">
+<legend class="leg">Hora</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 4px;">
+<sc-for list="{{times}}" as="t" hint-placeholder-count="8">
+<button type="button" class="opt" onClick="{{t.pick}}" aria-pressed="{{t.on}}" style="min-width: 116px; min-height: 52px; padding: 0 16px; text-align: center; font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; background: {{t.bg}}; color: {{t.fg}};">{{t.label}}</button>
+</sc-for>
+</div>
+</fieldset>
+<fieldset style="border: 0; margin: 0; padding: 0;">
+<legend class="leg">Personas</legend>
+<div style="display: flex; align-items: center; gap: 4px;">
+<button type="button" class="opt" onClick="{{less}}" aria-label="Una persona menos" style="width: 56px; height: 56px; font-size: 26px; text-align: center; background: #151515; color: #f2efe7;">−</button>
+<output class="d" style="min-width: 72px; text-align: center; font-size: 40px;">{{people}}</output>
+<button type="button" class="opt" onClick="{{more}}" aria-label="Una persona más" style="width: 56px; height: 56px; font-size: 26px; text-align: center; background: #151515; color: #f2efe7;">+</button>
+</div>
+</fieldset>
+</sc-if>
+
+<sc-if value="{{is3}}" hint-placeholder-val="{{false}}">
+<form style="display: flex; flex-direction: column; gap: 18px;" aria-label="Datos del titular de la reserva">
+<h2 class="leg" style="margin: 0;">Tus datos</h2>
+<p style="margin: 0; color: #3d3a34;">Los usamos para tu formulario de ingreso y para enviarte la confirmación. Si vienen varias personas, el asesor registra a cada una en la sede.</p>
+<div class="g2" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">
+<div class="fld" style="grid-column: span 2;"><label for="r-nom">Nombre completo</label><input id="r-nom" name="name" type="text" autocomplete="name" placeholder="Ej.: Laura Gómez Ruiz…"></div>
+<div class="fld"><label for="r-td">Tipo de documento</label><select id="r-td" name="doctype"><option>Cédula de ciudadanía</option><option>Cédula de extranjería</option><option>Pasaporte</option></select></div>
+<div class="fld"><label for="r-nd">Número de documento</label><input id="r-nd" name="docnumber" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="Ej.: 1020304050…"></div>
+<div class="fld"><label for="r-em">Correo electrónico</label><input id="r-em" name="email" type="email" autocomplete="email" spellcheck="false" placeholder="Ej.: laura@correo.com…"></div>
+<div class="fld"><label for="r-tel">Celular (WhatsApp)</label><input id="r-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="Ej.: 300 123 4567…"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 20px 22px; background: #e7e2d6; font-size: 15px;">
+<p style="margin: 0; font-weight: 700;">Antes de venir, ten en cuenta</p>
+<p style="margin: 0;">Debes ser mayor de edad y traer tu documento original. No se permite el ingreso bajo efectos de alcohol o sustancias. Si no tienes arma propia, practicas siempre con un instructor, después de la clase teórica.</p>
+</div>
+<button type="button" class="opt" onClick="{{toggleTerms}}" aria-pressed="{{termsOn}}" style="display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 14px; align-items: start; padding: 4px 0; background: transparent; color: #151515; font-size: 16px;">
+<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: {{termsBox}}; color: #ffffff; font-weight: 800; box-shadow: inset 0 0 0 2px #151515;">{{termsMark}}</span>
+<span>Acepto las condiciones del servicio, los términos comerciales y la política de reembolsos.</span>
+</button>
+<p style="margin: 0; font-size: 15px;"><a href="pagos.html#politicas">Leer las políticas</a></p>
+</form>
+</sc-if>
+
+<sc-if value="{{is4}}" hint-placeholder-val="{{false}}">
+<fieldset style="border: 0; margin: 0; padding: 0;">
+<legend class="leg">¿Cómo quieres pagar?</legend>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<sc-for list="{{methods}}" as="m" hint-placeholder-count="3">
+<button type="button" class="opt" onClick="{{m.pick}}" aria-pressed="{{m.on}}" disabled="{{m.off}}" style="display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 22px; background: {{m.bg}}; color: {{m.fg}};">
+<span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 50%; box-shadow: inset 0 0 0 2px currentColor; display: inline-flex; align-items: center; justify-content: center;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{m.dot}};"></span></span>
+<span><span style="display: block; font-size: 19px; font-weight: 700;">{{m.name}}</span><span style="display: block; font-size: 15px;">{{m.note}}</span></span>
+<span style="display: flex; gap: 6px; align-items: center;">
+<sc-for list="{{m.marks}}" as="k" hint-placeholder-count="3"><span style="display: inline-flex; align-items: center; justify-content: center; min-width: 48px; height: 30px; padding: 0 8px; font-size: 12px; font-weight: 800; background: #ffffff; color: #151515;">{{k}}</span></sc-for>
+</span>
+</button>
+</sc-for>
+</div>
+</fieldset>
+<div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 20px; padding: 26px; background: #151515; color: #f2efe7;">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f2efe7" stroke-width="1.6" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"></path><path d="M8.5 12l2.5 2.5 4.5-5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 16px;">
+<p style="margin: 0; font-size: 19px; font-weight: 700;">Así funciona el pago</p>
+<p style="margin: 0;">Al continuar se abre la ventana segura de GlobalPay Redeban. Ahí escribes los datos de tu tarjeta; Polígono Thor nunca los ve ni los guarda.</p>
+<p style="margin: 0;">Si tu banco lo pide, apruebas la compra con tu clave o tu app (3D Secure). Al terminar recibes un comprobante con número de autorización.</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is5}}" hint-placeholder-val="{{false}}">
+<section style="display: flex; flex-direction: column; gap: 28px;" aria-live="polite">
+<div style="display: flex; align-items: center; gap: 20px;">
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; background: #c8361b;" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.6"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<h2 class="d" style="margin: 0; font-size: 56px;">Pago aprobado</h2>
+</div>
+<p style="margin: 0; font-size: 20px;">Tu cupo está reservado. Te enviamos la confirmación al correo y por WhatsApp.</p>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px;">
+<div style="padding: 22px; background: #e7e2d6;"><dt style="font-size: 14px; color: #57534b;">Reserva</dt><dd style="margin: 4px 0 0; font-size: 24px; font-weight: 800;">THR-[000000]</dd></div>
+<div style="padding: 22px; background: #e7e2d6;"><dt style="font-size: 14px; color: #57534b;">Autorización Redeban</dt><dd style="margin: 4px 0 0; font-size: 24px; font-weight: 800;">[000000]</dd></div>
+<div style="padding: 22px; background: #e7e2d6;"><dt style="font-size: 14px; color: #57534b;">Total pagado</dt><dd style="margin: 4px 0 0; font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums;">{{sum.total}}</dd></div>
+</dl>
+<div style="padding: 26px; background: #151515; color: #f2efe7; display: flex; flex-direction: column; gap: 10px;">
+<p style="margin: 0; font-size: 19px; font-weight: 700;">Para el día de tu lección</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px;">
+<li>Trae tu documento original: cédula o pasaporte.</li>
+<li>Llega con tiempo para el formulario de ingreso y la clase teórica.</li>
+<li>No vengas bajo efectos de alcohol o sustancias.</li>
+<li>Puedes tomar fotos y video de tu práctica, siempre bajo las reglas de seguridad.</li>
+</ul>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px;"><a class="btn" href="inicio.html">Volver al inicio</a><a class="btn btn-quiet" href="https://wa.me/573202527842">Escribir por WhatsApp</a></div>
+</section>
+</sc-if>
+
+<sc-if value="{{showNav}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 8px;">
+<button type="button" class="btn btn-quiet" onClick="{{back}}" disabled="{{noBack}}">Atrás</button>
+<button type="button" class="btn {{nextClass}}" onClick="{{next}}" aria-disabled="{{blocked}}">{{nextLabel}}</button>
+</div>
+<sc-if value="{{hint}}" hint-placeholder-val="{{false}}"><p style="margin: -32px 0 0; text-align: right; font-size: 15px; color: #57534b;">{{hint}}</p></sc-if>
+</sc-if>
+</div>
+
+<aside class="summary" style="position: sticky; top: 24px; background: #151515; color: #f2efe7; padding: 32px; display: flex; flex-direction: column; gap: 20px;" aria-label="Resumen de la reserva">
+<h2 class="d" style="margin: 0; font-size: 32px;">Tu reserva</h2>
+<dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 20px; font-size: 16px;">
+<dt style="color: #cfcabe;">Lección</dt><dd style="margin: 0; font-weight: 600;">{{sum.service}}</dd>
+<dt style="color: #cfcabe;">Sede</dt><dd style="margin: 0; font-weight: 600;">{{sum.sede}}</dd>
+<dt style="color: #cfcabe;">Fecha</dt><dd style="margin: 0; font-weight: 600;">{{sum.date}}</dd>
+<dt style="color: #cfcabe;">Hora</dt><dd style="margin: 0; font-weight: 600;">{{sum.time}}</dd>
+<dt style="color: #cfcabe;">Personas</dt><dd style="margin: 0; font-weight: 600;">{{people}}</dd>
+</dl>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 16px; box-shadow: inset 0 1px 0 #3d3a34; font-size: 16px; font-variant-numeric: tabular-nums;">
+<sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 16px;"><span style="color: #cfcabe;">{{l.label}}</span><span>{{l.value}}</span></div>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 16px; box-shadow: inset 0 1px 0 #3d3a34;">
+<span style="font-size: 16px;">Total</span>
+<span class="d" style="font-size: 48px; font-variant-numeric: tabular-nums;">{{sum.total}}</span>
+</div>
+<p style="margin: 0; font-size: 14px; color: #cfcabe;">Precio final en pesos colombianos, sin cargos ocultos. Incluye arma, munición de la lección, protección auditiva e instructor certificado.</p>
+</aside>
+</div>
+</main>
+</div>
+</template>
+<script>window.__DC_PROPS={"metodosPorActivar": true};
+window.__DC_DEFINE=function(DCLogic){
+
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { step: 1, svc: 1, cert: false, ammo: 0, sede: 0, day: null, time: null, people: 1, terms: false, method: 0 };
+  }
+  renderVals() {
+    const st = this.state;
+    const extra = this.props.metodosPorActivar ?? true;
+    const fmt = (n) => '$' + n.toLocaleString('es-CO');
+    const on = (y) => ({ bg: y ? '#151515' : '#e7e2d6', fg: y ? '#f2efe7' : '#151515' });
+    const SV = [
+      { name: 'Revólver .38', tag: 'Básico', note: '5 cartuchos · 1 a 1:30 h', price: 131900, sedes: [0, 1] },
+      { name: 'Pistola 9 mm', tag: 'Más solicitada', note: '8 cartuchos · 1 a 1:30 h', price: 149900, sedes: [0, 1] },
+      { name: 'Escopeta cal. 12', tag: 'Básico', note: '5 cartuchos · 1 a 1:30 h', price: 111900, sedes: [0, 1] },
+      { name: 'Pistola + Revólver', tag: 'Combo', note: '6 de 9 mm y 4 de .38 · 1:30 h', price: 172900, sedes: [0, 1] },
+      { name: '3 Gun', tag: 'Combo', note: '3 cartuchos por arma · 1:30 h', price: 154900, sedes: [0, 1] },
+      { name: '3 Gun Élite', tag: 'Premium', note: '15 cartuchos · 1:30 a 2 h', price: 261900, sedes: [0, 1] },
+      { name: 'PDW Kit Roni', tag: 'Nuevo 2026', note: '9 cartuchos · carabina táctica', price: 169900, sedes: [0, 1] },
+      { name: 'Curso en línea', tag: 'Virtual', note: 'Una hora · material incluido', price: 69900, sedes: [2] }
+    ];
+    const SD = [
+      { name: 'Bogotá', note: 'Pista cubierta · Calle 73a # 71d-09' },
+      { name: 'Suesca', note: 'Campo abierto · fines de semana' },
+      { name: 'Virtual', note: 'En vivo o grabado' }
+    ];
+    const svc = SV[st.svc];
+    const sedeIdx = svc.sedes.includes(st.sede) ? st.sede : svc.sedes[0];
+    const dows = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+    const today = new Date();
+    const days = [];
+    for (let k = 1; k <= 14; k++) {
+      const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() + k);
+      const wk = d.getDay();
+      const off = sedeIdx === 1 && wk !== 0 && wk !== 6;
+      const sel = st.day === k && !off;
+      days.push(Object.assign({ dow: dows[wk], num: d.getDate(), off, on: String(sel), label: dows[wk] + ' ' + d.getDate() + ' ' + months[d.getMonth()], pick: () => this.setState({ day: k, time: null }) }, off ? { bg: '#ece8de', fg: '#a7a296' } : on(sel)));
+    }
+    const hours = sedeIdx === 1 ? [9, 10, 11, 12, 13, 14, 15] : sedeIdx === 2 ? [8, 10, 12, 14, 16, 18, 20] : [8, 9, 10, 11, 12, 13, 14, 15];
+    const times = hours.map((h) => Object.assign({ label: (h > 12 ? h - 12 : h) + ':00 ' + (h >= 12 ? 'p. m.' : 'a. m.'), on: String(st.time === h), pick: () => this.setState({ time: h }) }, on(st.time === h)));
+    const dayObj = days.find((d) => d.on === 'true');
+    const timeObj = times.find((t) => t.on === 'true');
+    const base = svc.price * st.people;
+    const certTotal = st.cert ? 55900 * st.people : 0;
+    const ammoTotal = st.ammo * 16900;
+    const total = base + certTotal + ammoTotal;
+    const lines = [{ label: svc.name + ' × ' + st.people, value: fmt(base) }];
+    if (st.cert) lines.push({ label: 'Certificado DCCAE × ' + st.people, value: fmt(certTotal) });
+    if (st.ammo) lines.push({ label: 'Cartuchos extra × ' + st.ammo, value: fmt(ammoTotal) });
+    const M = [
+      { name: 'Tarjeta de crédito', note: 'Procesado por GlobalPay Redeban · 3D Secure', marks: ['VISA', 'MC', 'AMEX'], off: false },
+      { name: 'PSE · débito bancario', note: '[Por activar con la pasarela]', marks: ['PSE'], off: true },
+      { name: 'Nequi o Daviplata', note: '[Por activar con la pasarela]', marks: ['NEQUI'], off: true }
+    ].filter((m, i) => i === 0 || extra);
+    const methods = M.map((m, i) => {
+      const sel = st.method === i && !m.off;
+      return Object.assign({}, m, { on: String(sel), dot: sel ? 'currentColor' : 'transparent', pick: () => this.setState({ method: i }) }, m.off ? { bg: '#ece8de', fg: '#8a857b' } : on(sel));
+    });
+    const step = st.step;
+    const ok = step === 1 ? true : step === 2 ? (!!dayObj && !!timeObj) : step === 3 ? st.terms : true;
+    const labels = ['Lección', 'Fecha y sede', 'Tus datos', 'Pago', 'Confirmación'];
+    const steps = labels.map((label, i) => {
+      const n = i + 1, done = n < step, cur = n === step;
+      return { label, current: cur ? 'step' : 'false', mark: done ? '✓' : String(n), bg: cur ? '#151515' : '#e7e2d6', fg: cur ? '#f2efe7' : (done ? '#151515' : '#57534b'), dotBg: cur ? '#c8361b' : (done ? '#151515' : '#cfc8b8'), dotFg: cur || done ? '#ffffff' : '#151515' };
+    });
+    const nextLabels = { 1: 'Elegir fecha y sede', 2: 'Continuar con mis datos', 3: 'Ir al pago', 4: 'Pagar ' + fmt(total) + ' con GlobalPay' };
+    const hints = { 2: 'Elige un día y una hora para continuar.', 3: 'Acepta las condiciones para continuar.' };
+    return {
+      steps, is1: step === 1, is2: step === 2, is3: step === 3, is4: step === 4, is5: step === 5,
+      showNav: step < 5, noBack: step === 1,
+      nextLabel: nextLabels[step] || '', nextClass: step === 4 ? 'btn-red' : '',
+      blocked: String(!ok), hint: ok ? '' : (hints[step] || ''),
+      next: () => { if (ok) this.setState({ step: Math.min(5, step + 1) }); },
+      back: () => this.setState({ step: Math.max(1, step - 1) }),
+      services: SV.map((s, i) => Object.assign({}, s, on(i === st.svc), { priceLabel: fmt(s.price), on: String(i === st.svc), pick: () => this.setState({ svc: i, sede: s.sedes.includes(st.sede) ? st.sede : s.sedes[0], day: null, time: null }) })),
+      certOn: String(st.cert), certBg: st.cert ? '#151515' : '#e7e2d6', certFg: st.cert ? '#f2efe7' : '#151515', certBox: st.cert ? '#c8361b' : '#ffffff', certMark: st.cert ? '✓' : '',
+      toggleCert: () => this.setState({ cert: !st.cert }),
+      ammo: st.ammo, lessAmmo: () => this.setState({ ammo: Math.max(0, st.ammo - 1) }), moreAmmo: () => this.setState({ ammo: Math.min(50, st.ammo + 1) }),
+      sedes: SD.filter((_, i) => svc.sedes.includes(i)).map((d) => { const i = SD.indexOf(d); return Object.assign({}, d, on(i === sedeIdx), { on: String(i === sedeIdx), pick: () => this.setState({ sede: i, day: null, time: null }) }); }),
+      days, times, suescaNote: sedeIdx === 1,
+      people: st.people, less: () => this.setState({ people: Math.max(1, st.people - 1) }), more: () => this.setState({ people: Math.min(10, st.people + 1) }),
+      termsOn: String(st.terms), termsBox: st.terms ? '#c8361b' : '#ffffff', termsMark: st.terms ? '✓' : '', toggleTerms: () => this.setState({ terms: !st.terms }),
+      methods, lines,
+      sum: { service: svc.name, sede: SD[sedeIdx].name, date: dayObj ? dayObj.label : 'Por elegir', time: timeObj ? timeObj.label : 'Por elegir', total: fmt(total) }
+    };
+  }
+}
+
+return Component;};</script>
+<script>
+(function () {
+  var tpl = document.getElementById('tpl');
+  var app = document.getElementById('app');
+  var HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
+  var WHOLE = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+
+  function DCLogic(props) { this.props = props || {}; this.state = {}; }
+  DCLogic.prototype.setState = function (p) {
+    var next = typeof p === 'function' ? p(this.state, this.props) : p;
+    this.state = Object.assign({}, this.state, next);
+    schedule();
+  };
+  DCLogic.prototype.forceUpdate = function () { schedule(); };
+
+  var Component = window.__DC_DEFINE(DCLogic);
+  var comp = new Component(window.__DC_PROPS || {});
+  if (!comp.state) comp.state = {};
+
+  function lookup(path, scopes) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (path === 'null') return null;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    if (/^'.*'$|^".*"$/.test(path)) return path.slice(1, -1);
+    var parts = path.split('.');
+    for (var i = 0; i < scopes.length; i++) {
+      var s = scopes[i];
+      if (s && Object.prototype.hasOwnProperty.call(s, parts[0])) {
+        var v = s[parts[0]];
+        for (var j = 1; j < parts.length; j++) { if (v == null) return undefined; v = v[parts[j]]; }
+        return v;
+      }
+    }
+    return undefined;
+  }
+  function interp(str, scopes) {
+    return str.replace(HOLE, function (_, p) { var v = lookup(p, scopes); return v == null ? '' : String(v); });
+  }
+
+  function renderNodes(parent, scopes, out) {
+    var kids = parent.childNodes;
+    for (var i = 0; i < kids.length; i++) renderNode(kids[i], scopes, out);
+  }
+
+  function renderNode(node, scopes, out) {
+    if (node.nodeType === 3) {
+      var t = node.nodeValue;
+      out.push(document.createTextNode(t.indexOf('{{') >= 0 ? interp(t, scopes) : t));
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    var tag = node.localName;
+    if (tag === 'sc-if') {
+      var raw = node.getAttribute('value') || '';
+      var m = raw.match(WHOLE);
+      var val = m ? lookup(m[1], scopes) : raw;
+      if (val && val !== 'false') renderNodes(node, scopes, out);
+      return;
+    }
+    if (tag === 'sc-for') {
+      var lm = (node.getAttribute('list') || '').match(WHOLE);
+      var list = lm ? lookup(lm[1], scopes) : [];
+      var as = node.getAttribute('as') || 'item';
+      (list || []).forEach(function (item, idx) {
+        var sc = {}; sc[as] = item; sc.$index = idx;
+        renderNodes(node, [sc].concat(scopes), out);
+      });
+      return;
+    }
+    var el = node.namespaceURI === 'http://www.w3.org/1999/xhtml'
+      ? document.createElement(tag)
+      : document.createElementNS(node.namespaceURI, tag);
+    for (var a = 0; a < node.attributes.length; a++) {
+      var at = node.attributes[a];
+      var name = at.name, value = at.value;
+      if (name.indexOf('hint-') === 0) continue;
+      var whole = value.match(WHOLE);
+      if (/^on[a-z]+$/.test(name)) {
+        var fn = whole ? lookup(whole[1], scopes) : null;
+        if (typeof fn === 'function') {
+          var ev = name.slice(2);
+          if (ev === 'change' && (tag === 'input' || tag === 'textarea')) ev = 'input';
+          el.addEventListener(ev, fn);
+        }
+        continue;
+      }
+      if (whole) {
+        var v = lookup(whole[1], scopes);
+        if (v === false || v == null) {
+          if (name.indexOf('aria-') === 0 && v === false) el.setAttribute(name, 'false');
+          continue;
+        }
+        el.setAttribute(name, v === true ? (name.indexOf('aria-') === 0 ? 'true' : '') : String(v));
+      } else if (value.indexOf('{{') >= 0) {
+        el.setAttribute(name, interp(value, scopes));
+      } else {
+        el.setAttribute(name, value);
+      }
+    }
+    var children = [];
+    renderNodes(node, scopes, children);
+    for (var c = 0; c < children.length; c++) el.appendChild(children[c]);
+    if (tag === 'input' && el.hasAttribute('value')) el.value = el.getAttribute('value');
+    out.push(el);
+  }
+
+  var pending = false, first = true;
+  function schedule() {
+    if (pending) return;
+    pending = true;
+    Promise.resolve().then(function () { pending = false; render(); });
+  }
+
+  function render() {
+    var active = document.activeElement;
+    var activeId = active && active.id && app.contains(active) ? active.id : null;
+    var sel = null;
+    try { if (activeId && typeof active.selectionStart === 'number') sel = active.value.length - active.selectionStart; } catch (e) {}
+    var openDetails = Array.prototype.map.call(app.querySelectorAll('details'), function (d) { return d.open; });
+
+    var vals = comp.renderVals ? comp.renderVals() : {};
+    var out = [];
+    renderNodes(tpl.content, [vals], out);
+    app.replaceChildren.apply(app, out);
+
+    var ds = app.querySelectorAll('details');
+    if (ds.length === openDetails.length) ds.forEach(function (d, i) { if (openDetails[i]) d.open = true; });
+    if (activeId) {
+      var n = document.getElementById(activeId);
+      if (n) {
+        n.focus({ preventScroll: true });
+        try { if (sel != null && typeof n.setSelectionRange === 'function') { var p = n.value.length - sel; n.setSelectionRange(p, p); } } catch (e) {}
+      }
+    }
+    app.querySelectorAll('form').forEach(function (f) { f.addEventListener('submit', function (e) { e.preventDefault(); }); });
+    if (first) {
+      first = false;
+      if (comp.componentDidMount) try { comp.componentDidMount(); } catch (e) {}
+      if (location.hash && location.hash.length > 1) {
+        var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target) target.scrollIntoView();
+      }
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    var t = id && document.getElementById(id);
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

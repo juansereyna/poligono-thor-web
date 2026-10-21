@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Polígono Thor · Propuesta nueva</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f2efe7}
+a{color:#151515}a:hover{color:#c8361b}
+.d{font-family:'Archivo',sans-serif;font-stretch:118%;font-weight:800;letter-spacing:-0.035em;line-height:0.92;text-wrap:balance}
+.wrap{max-width:1360px;margin:0 auto;padding-left:40px;padding-right:40px;box-sizing:border-box}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;background:#151515;color:#f2efe7;font-weight:600;font-size:17px;text-decoration:none;border:0;font-family:inherit;cursor:pointer;transition:background-color .15s ease, transform .15s ease;touch-action:manipulation}
+.btn:hover{background:#c8361b;color:#ffffff}
+.btn:active{transform:translateY(1px)}
+.btn-red{background:#c8361b;color:#ffffff}.btn-red:hover{background:#151515;color:#f2efe7}
+.btn-paper{background:#f2efe7;color:#151515}.btn-paper:hover{background:#ffffff;color:#151515}
+.btn:focus-visible,.tab:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #c8361b;outline-offset:3px}
+.link{font-weight:600;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px}
+.tab{font:inherit;cursor:pointer;border:0;min-height:56px;padding:0 24px;font-size:17px;font-weight:600;text-align:left;transition:background-color .15s ease, color .15s ease;touch-action:manipulation}
+.row{transition:background-color .2s ease}
+.row:hover{background:#e3ddcf !important}
+.row:hover .arrow{transform:translateX(6px)}
+.arrow{transition:transform .2s ease}
+.faq summary{list-style:none;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq details[open] .mk{transform:rotate(45deg)}
+.mk{transition:transform .2s ease}
+.spin{transform-origin:200px 200px;animation:spin 60s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}.btn,.row,.arrow,.mk{transition:none}}
+@media (max-width:900px){
+.wrap{padding-left:16px;padding-right:16px}
+.g12{grid-template-columns:minmax(0,1fr) !important}
+.g12 > *{grid-column:auto !important}
+.nav-links{display:none !important}
+.svc{grid-template-columns:minmax(0,1fr) !important;gap:8px !important}
+.cols3{grid-template-columns:minmax(0,1fr) !important}
+}
+</style>
+</head>
+<body>
+<div role="note" style="background:#151515;color:#f2efe7;font:500 14px/1.4 Archivo,system-ui,sans-serif;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;text-align:center"><span>Prototipo del rediseño de Polígono Thor.</span><span style="color:#ff8a70;font-weight:700">Los pagos y formularios son simulados: no se cobra nada.</span></div>
+<div id="app"></div>
+<template id="tpl">
+
+<div style="background: #f2efe7; color: #151515; font-family: 'Archivo', sans-serif; font-size: 18px; line-height: 1.55;">
+
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+<defs>
+<symbol id="pistol" viewBox="0 0 240 150">
+<path fill="currentColor" d="M18 20h198a8 8 0 0 1 8 8v20a6 6 0 0 1-6 6H18a8 8 0 0 1-8-8V28a8 8 0 0 1 8-8z"></path>
+<path fill="currentColor" d="M58 52h148v14H58z"></path>
+<path fill="currentColor" d="M62 60h52l-12 78a8 8 0 0 1-8 7H54a7 7 0 0 1-7-8z"></path>
+<path fill="none" stroke="currentColor" stroke-width="7" d="M112 66h36q8 0 6 8l-8 22q-2 6-9 6h-23"></path>
+<path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" d="M124 68q7 14 0 26"></path>
+<g fill="#151515" opacity="0.35"><rect x="28" y="26" width="3" height="22"></rect><rect x="35" y="26" width="3" height="22"></rect><rect x="42" y="26" width="3" height="22"></rect><rect x="49" y="26" width="3" height="22"></rect></g>
+<rect x="208" y="14" width="6" height="8" fill="currentColor"></rect>
+</symbol>
+<symbol id="revolver" viewBox="0 0 260 150">
+<path fill="currentColor" d="M128 32h120a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6H128z"></path>
+<rect x="244" y="24" width="6" height="10" fill="currentColor"></rect>
+<path fill="currentColor" d="M70 26h62v52H70z"></path>
+<rect x="82" y="34" width="44" height="34" rx="10" fill="#151515" opacity="0.35"></rect>
+<path fill="currentColor" d="M58 14l16 4 4 16-14 2z"></path>
+<path fill="currentColor" d="M72 72h34l-6 10q-6 22 -18 58a8 8 0 0 1-8 6H44a7 7 0 0 1-6-9l22-58z"></path>
+<path fill="none" stroke="currentColor" stroke-width="7" d="M106 78h22q6 0 4 7l-6 16q-2 6-8 6h-16"></path>
+<path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" d="M112 80q6 10 0 20"></path>
+</symbol>
+<symbol id="shotgun" viewBox="0 0 480 120">
+<path fill="currentColor" d="M8 64l118-22h12v34L22 104a10 10 0 0 1-14-10z"></path>
+<path fill="currentColor" d="M136 38h82v36h-82z"></path>
+<rect x="218" y="40" width="252" height="12" fill="currentColor"></rect>
+<rect x="218" y="56" width="180" height="10" fill="currentColor"></rect>
+<rect x="256" y="52" width="86" height="22" rx="4" fill="currentColor"></rect>
+<g fill="#151515" opacity="0.35"><rect x="266" y="56" width="3" height="14"></rect><rect x="274" y="56" width="3" height="14"></rect><rect x="282" y="56" width="3" height="14"></rect><rect x="290" y="56" width="3" height="14"></rect><rect x="298" y="56" width="3" height="14"></rect></g>
+<path fill="none" stroke="currentColor" stroke-width="6" d="M156 74h30q6 0 4 6l-6 14q-2 4-8 4h-20"></path>
+<path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M166 76q5 9 0 17"></path>
+<rect x="462" y="34" width="6" height="8" fill="currentColor"></rect>
+</symbol>
+<symbol id="bullet" viewBox="0 0 30 90">
+<path d="M5 34h20v52H5z" fill="#b8913c"></path>
+<rect x="3" y="80" width="24" height="7" fill="#9c7a2e"></rect>
+<path d="M6 34C6 16 10 6 15 2c5 4 9 14 9 32z" fill="#c26a3c"></path>
+</symbol>
+<symbol id="shell" viewBox="0 0 30 90">
+<rect x="4" y="4" width="22" height="66" rx="2" fill="#c8361b"></rect>
+<rect x="2" y="66" width="26" height="20" fill="#b8913c"></rect>
+<rect x="2" y="84" width="26" height="4" fill="#9c7a2e"></rect>
+</symbol>
+<symbol id="tgt" viewBox="0 0 100 100">
+<circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2.5"></circle>
+<circle cx="50" cy="50" r="32" fill="none" stroke="currentColor" stroke-width="2.5"></circle>
+<circle cx="50" cy="50" r="18" fill="currentColor"></circle>
+</symbol>
+</defs>
+</svg>
+
+<header class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 22px; padding-bottom: 22px;">
+<a href="#inicio" style="display: flex; align-items: center; gap: 12px; text-decoration: none;" aria-label="Polígono de Tiro Thor, inicio">
+<svg width="36" height="36" viewBox="0 0 100 100" aria-hidden="true" style="color: #151515;"><use href="#tgt"></use><circle cx="50" cy="50" r="6" fill="#c8361b"></circle></svg>
+<span class="d" style="font-size: 22px; letter-spacing: -0.02em;" translate="no">Polígono Thor</span>
+</a>
+<nav aria-label="Principal" style="display: flex; align-items: center; gap: 32px;">
+<div class="nav-links" style="display: flex; gap: 28px; font-size: 16px; font-weight: 500;">
+<a href="lecciones.html" style="text-decoration: none;">Lecciones</a>
+<a href="cursos.html" style="text-decoration: none;">Cursos avanzados</a>
+<a href="certificaciones.html" style="text-decoration: none;">Certificado DCCAE</a>
+<a href="guia-legal.html" style="text-decoration: none;">Guía legal</a>
+<a href="pagos.html" style="text-decoration: none;">Pagos</a>
+</div>
+<a class="btn btn-red" href="reservar.html" style="min-height: 46px; padding: 0 22px; font-size: 16px;">Reservar</a>
+</nav>
+</header>
+
+<main>
+<section id="inicio" class="wrap g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: center; padding-top: 40px; padding-bottom: 72px; min-height: 700px;">
+<div style="grid-column: 1 / span 7; display: flex; flex-direction: column; gap: 32px; align-items: flex-start;">
+<h1 class="d" style="margin: 0; font-size: clamp(56px, 6.6vw, 104px);">Formación en armas de fuego</h1>
+<p style="margin: 0; max-width: 560px; font-size: 21px; line-height: 1.5;">Lecciones con arma, munición e instructor certificado incluidos, en Bogotá y Suesca. Autorizado y vigilado por el DCCAE. No necesitas experiencia previa.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center;">
+<a class="btn btn-red" href="#lecciones">Elegir mi lección</a>
+<a class="link" href="https://wa.me/573202527842">Escribir por WhatsApp</a>
+</div>
+<p style="margin: 8px 0 0; font-size: 16px; color: #57534b;">Desde <strong style="color: #151515; font-variant-numeric: tabular-nums;">$111.900</strong> por persona, todo incluido. Sin cargos ocultos.</p>
+</div>
+<figure style="grid-column: 8 / span 5; margin: 0; position: relative;">
+<svg viewBox="0 0 400 400" role="img" aria-label="Blanco de tiro con cinco impactos agrupados cerca del centro" style="width: 100%; height: auto; display: block; color: #151515;">
+<g class="spin">
+<g stroke="#151515" stroke-width="2"><line x1="200" y1="0" x2="200" y2="14"></line><line x1="200" y1="386" x2="200" y2="400"></line><line x1="0" y1="200" x2="14" y2="200"></line><line x1="386" y1="200" x2="400" y2="200"></line></g>
+</g>
+<circle cx="200" cy="200" r="184" fill="#faf8f3" stroke="#151515" stroke-width="2"></circle>
+<circle cx="200" cy="200" r="152" fill="none" stroke="#151515" stroke-width="2"></circle>
+<circle cx="200" cy="200" r="120" fill="none" stroke="#151515" stroke-width="2"></circle>
+<circle cx="200" cy="200" r="88" fill="#151515"></circle>
+<circle cx="200" cy="200" r="60" fill="none" stroke="#faf8f3" stroke-width="2"></circle>
+<circle cx="200" cy="200" r="32" fill="none" stroke="#faf8f3" stroke-width="2"></circle>
+<circle cx="200" cy="200" r="10" fill="#c8361b"></circle>
+<g font-family="Archivo, sans-serif" font-size="15" font-weight="600" text-anchor="middle"><text x="200" y="36" fill="#151515">7</text><text x="200" y="68" fill="#151515">8</text><text x="200" y="100" fill="#151515">9</text><text x="200" y="134" fill="#faf8f3">10</text></g>
+<g><circle cx="192" cy="190" r="7" fill="#faf8f3"></circle><circle cx="192" cy="190" r="4.5" fill="#151515"></circle>
+<circle cx="214" cy="206" r="7" fill="#faf8f3"></circle><circle cx="214" cy="206" r="4.5" fill="#151515"></circle>
+<circle cx="202" cy="222" r="7" fill="#faf8f3"></circle><circle cx="202" cy="222" r="4.5" fill="#151515"></circle>
+<circle cx="178" cy="212" r="7" fill="#faf8f3"></circle><circle cx="178" cy="212" r="4.5" fill="#151515"></circle>
+<circle cx="236" cy="170" r="7" fill="#151515"></circle><circle cx="236" cy="170" r="4.5" fill="#faf8f3"></circle></g>
+</svg>
+<figcaption style="position: absolute; right: 0; bottom: 4%; background: #151515; color: #f2efe7; font-size: 15px; padding: 10px 16px; max-width: 220px;">Tu blanco es tuyo: te lo llevas a casa.</figcaption>
+</figure>
+</section>
+
+<section aria-label="Cifras" style="background: #151515; color: #f2efe7;">
+<div class="wrap cols3" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; padding-top: 44px; padding-bottom: 44px;">
+<div><p class="d" style="margin: 0; font-size: 60px; font-variant-numeric: tabular-nums;">8.000+</p><p style="margin: 6px 0 0; font-size: 16px; color: #cfcabe;">clientes formados</p></div>
+<div><p class="d" style="margin: 0; font-size: 60px; font-variant-numeric: tabular-nums;">3.000+</p><p style="margin: 6px 0 0; font-size: 16px; color: #cfcabe;">certificaciones expedidas</p></div>
+<div><p class="d" style="margin: 0; font-size: 60px; font-variant-numeric: tabular-nums;">10</p><p style="margin: 6px 0 0; font-size: 16px; color: #cfcabe;">cursos especializados</p></div>
+<div><p class="d" style="margin: 0; font-size: 60px; font-variant-numeric: tabular-nums;">2</p><p style="margin: 6px 0 0; font-size: 16px; color: #cfcabe;">sedes y aula virtual 24/7</p></div>
+</div>
+</section>
+
+<section id="lecciones" style="padding-top: 160px;">
+<div class="wrap g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: end; margin-bottom: 48px;">
+<h2 class="d" style="grid-column: 1 / span 7; margin: 0; font-size: clamp(48px, 5.2vw, 84px);">Elige con qué arma empezar</h2>
+<p style="grid-column: 9 / span 4; margin: 0; font-size: 18px; color: #57534b;">Cada lección incluye el arma, la munición INDUMIL, protección auditiva y un instructor certificado COSECAD a tu lado.</p>
+</div>
+<div class="wrap">
+<div role="tablist" aria-label="Arma de la lección" style="display: flex; flex-wrap: wrap; gap: 4px;">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+<button type="button" role="tab" class="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="background: {{t.bg}}; color: {{t.fg}};">{{t.label}}</button>
+</sc-for>
+</div>
+<div role="tabpanel" class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0; background: #151515; color: #f2efe7;">
+<div style="grid-column: 1 / span 7; padding: 56px 48px; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; min-height: 520px; box-sizing: border-box;">
+<svg viewBox="{{w.vb}}" role="img" aria-label="{{w.alt}}" style="width: 100%; max-width: {{w.maxw}}; height: auto; color: #f2efe7; align-self: center;"><use href="{{w.sym}}"></use></svg>
+<div style="display: flex; flex-direction: column; gap: 14px;">
+<p style="margin: 0; font-size: 15px; color: #cfcabe;">Munición incluida: {{w.n}} {{w.unit}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;" aria-hidden="true">
+<sc-for list="{{w.rounds}}" as="r" hint-placeholder-count="8">
+<svg viewBox="0 0 30 90" width="22" height="66"><use href="{{r.sym}}"></use></svg>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="grid-column: 8 / span 5; padding: 56px 48px; background: #232320; display: flex; flex-direction: column; gap: 20px; box-sizing: border-box;">
+<sc-if value="{{w.badge}}" hint-placeholder-val="{{false}}"><p style="margin: 0; align-self: flex-start; font-size: 14px; font-weight: 700; background: #c8361b; color: #ffffff; padding: 5px 10px;">{{w.badge}}</p></sc-if>
+<h3 class="d" style="margin: 0; font-size: 52px;">{{w.name}}</h3>
+<p style="margin: 0; font-size: 16px; color: #cfcabe;">{{w.model}}</p>
+<p style="margin: 0; font-size: 18px;">{{w.desc}}</p>
+<dl style="margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 20px; font-size: 16px;">
+<dt style="color: #cfcabe;">Duración</dt><dd style="margin: 0;">{{w.dur}}</dd>
+<dt style="color: #cfcabe;">Para</dt><dd style="margin: 0;">{{w.who}}</dd>
+<dt style="color: #cfcabe;">Sedes</dt><dd style="margin: 0;">Bogotá y Suesca</dd>
+</dl>
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;">
+<p style="margin: 0; line-height: 1;"><span style="display: block; font-size: 14px; color: #cfcabe; margin-bottom: 6px;">Por persona</span><span class="d" style="font-size: 56px; font-variant-numeric: tabular-nums;">{{w.price}}</span></p>
+<a class="btn btn-red" href="{{w.wa}}">Reservar esta lección</a>
+</div>
+</div>
+</div>
+<p style="margin: 20px 0 0; font-size: 16px; color: #57534b;">También hay combos de dos y tres armas desde $154.900, el plan 3 Gun Élite y el nuevo Kit Roni, exclusivo en Colombia. <a class="link" href="lecciones.html">Ver todo el catálogo</a></p>
+</div>
+</section>
+
+<section id="servicios" class="wrap" style="padding-top: 160px;">
+<h2 class="d" style="margin: 0 0 48px; font-size: clamp(48px, 5.2vw, 84px);">Todo lo que ofrecemos</h2>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<sc-for list="{{services}}" as="s" hint-placeholder-count="4">
+<a class="row svc" href="{{s.href}}" style="display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 2fr) 40px; gap: 32px; align-items: center; padding: 36px 32px; text-decoration: none; background: {{s.bg}};">
+<span class="d" style="font-size: 36px;">{{s.name}}</span>
+<span style="font-size: 17px; color: #3d3a34;">{{s.desc}}</span>
+<span style="font-size: 17px;"><span style="display: block; font-size: 14px; color: #57534b;">{{s.from}}</span><strong style="font-size: 22px; font-variant-numeric: tabular-nums;">{{s.price}}</strong></span>
+<svg class="arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section class="wrap" style="padding-top: 160px;">
+<h2 class="d" style="margin: 0 0 56px; font-size: clamp(48px, 5.2vw, 84px);">Así es tu primera visita</h2>
+<div class="cols3" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+<div style="display: flex; flex-direction: column; gap: 16px; padding-top: 28px; box-shadow: inset 0 6px 0 #151515;">
+<h3 class="d" style="margin: 0; font-size: 48px;">Llegas</h3>
+<p style="margin: 0;">Con tu cédula o pasaporte. Un asesor te recibe y te ayuda con el formulario de ingreso.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px; padding-top: 28px; box-shadow: inset 0 6px 0 #151515;">
+<h3 class="d" style="margin: 0; font-size: 48px;">Aprendes</h3>
+<p style="margin: 0;">Clase teórica con el instructor: seguridad, partes del arma y principios del disparo.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px; padding-top: 28px; box-shadow: inset 0 6px 0 #c8361b;">
+<h3 class="d" style="margin: 0; font-size: 48px; color: #c8361b;">Disparas</h3>
+<p style="margin: 0;">En la línea de tiro, con el instructor a tu lado todo el tiempo. Y te llevas tu blanco.</p>
+</div>
+</div>
+</section>
+
+<section id="sedes" class="wrap" style="padding-top: 160px;">
+<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: center;">
+<div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 40px;">
+<h2 class="d" style="margin: 0; font-size: clamp(48px, 5.2vw, 84px);">Dos pistas, a 44 km</h2>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h3 style="margin: 0; font-size: 24px; font-weight: 700;">Bogotá · pista cubierta</h3>
+<p style="margin: 0;">Calle 73a # 71d-09</p>
+<p style="margin: 0; color: #57534b;">Lunes a domingo, 8:00 a. m. a 4:00 p. m.</p>
+<p style="margin: 0; color: #57534b;">Lecciones básicas, intermedias y certificaciones.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h3 style="margin: 0; font-size: 24px; font-weight: 700;">Suesca · campo abierto</h3>
+<p style="margin: 0;">Centro de Entrenamiento, ruta en Waze</p>
+<p style="margin: 0; color: #57534b;">Sábados y domingos, 9:00 a. m. a 4:00 p. m.</p>
+<p style="margin: 0; color: #57534b;">Mayores distancias y cursos avanzados con vehículo.</p>
+</div>
+<p style="margin: 0; font-size: 16px; color: #57534b;">Y un aula virtual 24/7 para cursos en vivo, clases grabadas y certificaciones teóricas.</p>
+</div>
+<figure style="grid-column: 7 / span 6; margin: 0;">
+<svg viewBox="0 0 600 460" role="img" aria-label="Mapa esquemático: la sede de Bogotá al sur y la de Suesca 44 km al norte" style="width: 100%; height: auto; display: block; background: #e7e2d6;">
+<g fill="none" stroke="#cfc8b8" stroke-width="2">
+<path d="M-10 120 C 120 80, 220 160, 360 110 S 560 60, 620 90"></path>
+<path d="M-10 170 C 140 130, 240 210, 380 160 S 560 120, 620 140"></path>
+<path d="M-10 230 C 150 200, 260 270, 400 220 S 560 190, 620 210"></path>
+<path d="M-10 300 C 160 270, 280 330, 420 290 S 560 260, 620 280"></path>
+<path d="M-10 370 C 170 340, 300 400, 440 360 S 560 330, 620 350"></path>
+</g>
+<path d="M140 372 C 200 330, 210 280, 280 250 S 380 200, 400 160 S 440 110, 470 96" fill="none" stroke="#c8361b" stroke-width="5" stroke-dasharray="2 12" stroke-linecap="round"></path>
+<g><circle cx="140" cy="372" r="16" fill="#151515"></circle><circle cx="140" cy="372" r="6" fill="#f2efe7"></circle>
+<text x="168" y="380" font-family="Archivo, sans-serif" font-size="26" font-weight="800" fill="#151515">Bogotá</text></g>
+<g><circle cx="470" cy="96" r="16" fill="#151515"></circle><circle cx="470" cy="96" r="6" fill="#f2efe7"></circle>
+<text x="456" y="62" text-anchor="end" font-family="Archivo, sans-serif" font-size="26" font-weight="800" fill="#151515">Suesca</text></g>
+<g><rect x="262" y="194" width="104" height="44" fill="#151515"></rect><text x="314" y="224" text-anchor="middle" font-family="Archivo, sans-serif" font-size="22" font-weight="800" fill="#f2efe7">44 km</text></g>
+<g transform="translate(548 400)"><path d="M0 -28 L10 0 L0 -6 L-10 0 Z" fill="#151515"></path><text x="0" y="22" text-anchor="middle" font-family="Archivo, sans-serif" font-size="16" font-weight="700" fill="#151515">N</text></g>
+</svg>
+</figure>
+</div>
+</section>
+
+<section id="certificado" class="wrap" style="padding-top: 160px;">
+<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: center;">
+<figure style="grid-column: 1 / span 6; margin: 0;">
+<svg viewBox="0 0 560 400" role="img" aria-label="Certificado DCCAE con sello y código QR verificable" style="width: 100%; height: auto; display: block;">
+<rect x="20" y="20" width="520" height="360" fill="#faf8f3"></rect>
+<rect x="20" y="20" width="520" height="12" fill="#151515"></rect>
+<rect x="44" y="56" width="472" height="300" fill="none" stroke="#151515" stroke-width="1.5"></rect>
+<text x="280" y="108" text-anchor="middle" font-family="Archivo, sans-serif" font-size="32" font-weight="800" fill="#151515" letter-spacing="2">CERTIFICADO</text>
+<text x="280" y="136" text-anchor="middle" font-family="Archivo, sans-serif" font-size="15" font-weight="600" fill="#57534b">Manejo seguro de armas de fuego · Decreto 2535</text>
+<rect x="150" y="170" width="260" height="14" fill="#151515"></rect>
+<rect x="110" y="204" width="340" height="8" fill="#cfc8b8"></rect>
+<rect x="140" y="222" width="280" height="8" fill="#cfc8b8"></rect>
+<g transform="translate(128 296)"><circle r="40" fill="#c8361b"></circle><circle r="30" fill="none" stroke="#faf8f3" stroke-width="2"></circle><text y="6" text-anchor="middle" font-family="Archivo, sans-serif" font-size="15" font-weight="800" fill="#faf8f3">DCCAE</text></g>
+<rect x="216" y="318" width="140" height="2" fill="#151515"></rect>
+<g transform="translate(410 262)" fill="#151515">
+<rect width="74" height="74" fill="#faf8f3"></rect>
+<rect x="0" y="0" width="22" height="22"></rect><rect x="5" y="5" width="12" height="12" fill="#faf8f3"></rect><rect x="8" y="8" width="6" height="6"></rect>
+<rect x="52" y="0" width="22" height="22"></rect><rect x="57" y="5" width="12" height="12" fill="#faf8f3"></rect><rect x="60" y="8" width="6" height="6"></rect>
+<rect x="0" y="52" width="22" height="22"></rect><rect x="5" y="57" width="12" height="12" fill="#faf8f3"></rect><rect x="8" y="60" width="6" height="6"></rect>
+<rect x="28" y="2" width="6" height="6"></rect><rect x="38" y="8" width="6" height="6"></rect><rect x="28" y="16" width="12" height="6"></rect>
+<rect x="28" y="30" width="6" height="12"></rect><rect x="40" y="28" width="6" height="6"></rect><rect x="52" y="30" width="12" height="6"></rect>
+<rect x="2" y="30" width="12" height="6"></rect><rect x="16" y="38" width="6" height="6"></rect><rect x="66" y="40" width="6" height="12"></rect>
+<rect x="30" y="48" width="12" height="6"></rect><rect x="48" y="50" width="6" height="12"></rect><rect x="30" y="62" width="6" height="10"></rect>
+<rect x="58" y="62" width="14" height="6"></rect><rect x="42" y="66" width="6" height="6"></rect>
+</g>
+</svg>
+</figure>
+<div style="grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 24px; align-items: flex-start;">
+<h2 class="d" style="margin: 0; font-size: clamp(44px, 4.6vw, 72px);">Certificado DCCAE</h2>
+<p style="margin: 0; font-size: 19px;">El aval del Comando General de las Fuerzas Militares, expedido en el polígono. Lo agregas a cualquier lección y lo descargas al día hábil siguiente, con código QR verificable.</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; color: #3d3a34;">
+<li>Revalidar tu permiso de porte.</li>
+<li>Respaldar tu aptitud para comprar un arma.</li>
+<li>Soporte para seguridad privada y escoltas.</li>
+</ul>
+<p style="margin: 0; display: flex; align-items: baseline; gap: 10px;"><span class="d" style="font-size: 52px; font-variant-numeric: tabular-nums;">$55.900</span><span style="color: #57534b;">por persona</span></p>
+<a class="btn" href="reservar.html">Agregar a mi lección</a>
+</div>
+</div>
+</section>
+
+<section id="puntos" style="margin-top: 160px; background: #c8361b; color: #ffffff;">
+<div class="wrap g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: center; padding-top: 112px; padding-bottom: 112px;">
+<div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 24px; align-items: flex-start;">
+<h2 class="d" style="margin: 0; font-size: clamp(48px, 5.2vw, 84px);">La cuarta es gratis</h2>
+<p style="margin: 0; font-size: 19px;">Ven tres veces a la pista y tu cuarta entrada no se paga. Además, cada curso que completas te da un cartucho gratis para el siguiente.</p>
+<form style="display: flex; flex-wrap: wrap; gap: 8px; width: 100%;" aria-label="Consultar mis puntos">
+<label for="ced" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Número de cédula</label>
+<input id="ced" name="cedula" type="text" inputmode="numeric" autocomplete="off" placeholder="Tu número de cédula…" style="flex: 1 1 220px; min-height: 56px; padding: 0 16px; font: inherit; font-size: 17px; border: 0; background: #ffffff; color: #151515;">
+<button type="button" class="btn">Ver mis puntos</button>
+</form>
+<p style="margin: 0; font-size: 15px;">Premios personales e intransferibles, válidos por 90 días. Presenta tu cédula en la pista.</p>
+</div>
+<figure style="grid-column: 7 / span 6; margin: 0;">
+<svg viewBox="0 0 600 340" role="img" aria-label="Tarjeta de visitas con dos de tres visitas marcadas y la cuarta entrada gratis" style="width: 100%; height: auto; display: block;">
+<rect x="10" y="10" width="580" height="320" fill="#f2efe7"></rect>
+<text x="44" y="68" font-family="Archivo, sans-serif" font-size="28" font-weight="800" fill="#151515">TARJETA THOR</text>
+<text x="44" y="96" font-family="Archivo, sans-serif" font-size="16" font-weight="500" fill="#57534b">Visitas a la pista</text>
+<g transform="translate(44 140)">
+<g color="#151515"><svg x="0" y="0" width="100" height="100" viewBox="0 0 100 100"><use href="#tgt"></use></svg></g>
+<path d="M14 14 L86 86 M86 14 L14 86" stroke="#c8361b" stroke-width="9" stroke-linecap="round"></path>
+</g>
+<g transform="translate(176 140)">
+<g color="#151515"><svg x="0" y="0" width="100" height="100" viewBox="0 0 100 100"><use href="#tgt"></use></svg></g>
+<path d="M14 14 L86 86 M86 14 L14 86" stroke="#c8361b" stroke-width="9" stroke-linecap="round"></path>
+</g>
+<g transform="translate(308 140)" color="#cfc8b8"><svg x="0" y="0" width="100" height="100" viewBox="0 0 100 100"><use href="#tgt"></use></svg></g>
+<g transform="translate(440 140)"><rect width="116" height="100" fill="#151515"></rect><text x="58" y="46" text-anchor="middle" font-family="Archivo, sans-serif" font-size="22" font-weight="800" fill="#f2efe7">4.ª</text><text x="58" y="74" text-anchor="middle" font-family="Archivo, sans-serif" font-size="18" font-weight="700" fill="#f2efe7">gratis</text></g>
+<text x="44" y="292" font-family="Archivo, sans-serif" font-size="15" font-weight="500" fill="#57534b">Ejemplo: dos visitas registradas.</text>
+</svg>
+</figure>
+</div>
+</section>
+
+<section class="wrap faq" style="padding-top: 160px;">
+<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px;">
+<h2 class="d" style="grid-column: 1 / span 4; margin: 0; font-size: clamp(48px, 5.2vw, 84px);">Antes de venir</h2>
+<div style="grid-column: 6 / span 7; display: flex; flex-direction: column; gap: 4px;">
+<sc-for list="{{faqs}}" as="q" hint-placeholder-count="6">
+<details style="background: #e7e2d6; padding: 0 28px;">
+<summary style="display: flex; justify-content: space-between; gap: 24px; align-items: center; min-height: 76px; font-size: 20px; font-weight: 700;">{{q.q}}<span class="mk" aria-hidden="true" style="font-size: 30px; font-weight: 400;">+</span></summary>
+<p style="margin: 0; padding-bottom: 26px; max-width: 620px;">{{q.a}}</p>
+</details>
+</sc-for>
+</div>
+</div>
+</section>
+</main>
+
+<footer style="margin-top: 160px; background: #151515; color: #f2efe7; overflow: hidden;">
+<div class="wrap g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; padding-top: 112px; padding-bottom: 64px;">
+<div style="grid-column: 1 / span 7; display: flex; flex-direction: column; gap: 28px; align-items: flex-start;">
+<h2 class="d" style="margin: 0; font-size: clamp(48px, 5.2vw, 84px);">Reserva hoy y dispara esta semana</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 12px;"><a class="btn btn-red" href="reservar.html">Reservar y pagar</a><a class="btn btn-paper" href="https://wa.me/573202527842">WhatsApp +57 320 252 7842</a></div>
+</div>
+<div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 14px; font-size: 16px; color: #cfcabe;">
+<p style="margin: 0;"><strong style="color: #f2efe7;">Bogotá</strong> · Calle 73a # 71d-09</p>
+<p style="margin: 0;"><strong style="color: #f2efe7;">Suesca</strong> · a 44 km de Bogotá</p>
+<p style="margin: 0;"><a href="https://instagram.com/poligonothor" style="color: #f2efe7;">Instagram</a> · <a href="https://facebook.com/poligonothor" style="color: #f2efe7;">Facebook</a></p>
+<p style="margin: 0;"><a href="lecciones.html" style="color: #cfcabe;">Lecciones</a> · <a href="cursos.html" style="color: #cfcabe;">Cursos avanzados</a> · <a href="certificaciones.html" style="color: #cfcabe;">Certificaciones</a></p>
+<p style="margin: 0;"><a href="guia-legal.html" style="color: #cfcabe;">Guía legal de legítima defensa</a> · <a href="gobierno.html" style="color: #cfcabe;">Gobierno</a> · <a href="pagos.html" style="color: #cfcabe;">Pagos</a></p>
+<p style="margin: 0;"><a href="pagos.html#politicas" style="color: #cfcabe;">Condiciones del servicio</a> · <a href="pagos.html#politicas" style="color: #cfcabe;">Términos</a> · <a href="pagos.html#politicas" style="color: #cfcabe;">Reembolsos</a></p>
+</div>
+</div>
+<div class="wrap" style="padding-bottom: 20px; font-size: 14px; color: #a7a296;">© 2026 Polígono de Tiro Thor · Autorizado y vigilado por el DCCAE, Comando General de las Fuerzas Militares</div>
+<p class="d" aria-hidden="true" style="margin: 0 0 -0.2em; text-align: center; font-size: 27vw; line-height: 0.8; color: #c8361b;" translate="no">THOR</p>
+</footer>
+</div>
+</template>
+<script>window.__DC_PROPS={};
+window.__DC_DEFINE=function(DCLogic){
+
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { w: 0 }; }
+  renderVals() {
+    const W = [
+      { label: 'Pistola 9 mm', name: 'Pistola 9 mm', model: 'Córdova · INDUMIL', sym: '#pistol', vb: '0 0 240 150', maxw: '440px', alt: 'Silueta de la pistola Córdova 9 mm', n: 8, unit: 'cartuchos 9 mm', round: '#bullet', price: '$149.900', dur: '1 a 1:30 h', who: 'Principiantes con permiso de porte', badge: 'La más solicitada', desc: 'Postura, mira y gatillo con una de las pistolas más usadas en seguridad y defensa en Colombia.' },
+      { label: 'Revólver .38', name: 'Revólver .38', model: 'Scorpio · INDUMIL .38 Special', sym: '#revolver', vb: '0 0 260 150', maxw: '460px', alt: 'Silueta del revólver Scorpio .38', n: 5, unit: 'cartuchos .38 Special', round: '#bullet', price: '$131.900', dur: '1 a 1:30 h', who: 'Principiantes y civiles', badge: '', desc: 'Tu primera experiencia con un arma de fuego, con teoría de seguridad y partes del arma.' },
+      { label: 'Escopeta cal. 12', name: 'Escopeta cal. 12', model: 'Hatsan · acción de bombeo', sym: '#shotgun', vb: '0 0 480 120', maxw: '640px', alt: 'Silueta de la escopeta Hatsan calibre 12', n: 5, unit: 'cartuchos calibre 12', round: '#shell', price: '$111.900', dur: '1 a 1:30 h', who: 'Civiles', badge: '', desc: 'Una experiencia intensa: postura y manejo del retroceso con escopeta de bombeo.' }
+    ];
+    const i = this.state.w;
+    const w = W[i];
+    const msg = 'Hola, quiero reservar una lección de ' + w.name + '.';
+    return {
+      tabs: W.map((x, k) => ({ label: x.label, on: String(k === i), bg: k === i ? '#151515' : '#e7e2d6', fg: k === i ? '#f2efe7' : '#151515', pick: () => this.setState({ w: k }) })),
+      w: Object.assign({}, w, { rounds: Array.from({ length: w.n }, () => ({ sym: w.round })), wa: 'reservar.html' }),
+      services: [
+        { name: 'Lecciones de tiro', desc: 'Revólver, pistola, escopeta, combos y Kit Roni. Arma y munición incluidas.', from: 'Desde', price: '$111.900', href: 'lecciones.html', bg: '#e7e2d6' },
+        { name: 'Certificado DCCAE', desc: 'Aval oficial bajo el Decreto 2535, verificable con QR.', from: 'Por persona', price: '$55.900', href: 'certificaciones.html', bg: '#f2efe7' },
+        { name: 'Cursos en línea', desc: 'Una hora, en vivo o grabados, con material incluido, desde cualquier lugar.', from: 'Desde', price: '$69.900', href: 'certificaciones.html', bg: '#e7e2d6' },
+        { name: 'Cursos avanzados', desc: '10 programas: pistola avanzada, CQB, manejo evasivo, primeros auxilios tácticos y más.', from: 'Consultar', price: 'Por cohorte', href: 'cursos.html', bg: '#f2efe7' }
+      ],
+      faqs: [
+        { q: '¿Necesito experiencia previa?', a: 'No. Cada lección incluye un instructor certificado que te acompaña de la teoría a la línea de tiro.' },
+        { q: '¿Quién puede disparar?', a: 'Cualquier adulto, colombiano o extranjero. Trae tu cédula o pasaporte.' },
+        { q: '¿Qué incluye el precio?', a: 'El arma, la munición INDUMIL de la lección, la protección auditiva y el instructor. El precio que ves es el que pagas.' },
+        { q: '¿El polígono está autorizado?', a: 'Sí. Está autorizado y vigilado por el DCCAE, bajo el Comando General de las Fuerzas Militares, con protocolos SST certificados.' },
+        { q: '¿Puedo comprar más munición?', a: 'Sí, cada cartucho extra cuesta $16.900 y está disponible en todas las lecciones.' },
+        { q: '¿Cómo pago?', a: 'En línea con tarjeta de crédito Visa, Mastercard o American Express, a través de GlobalPay Redeban. Recibes un comprobante con número de autorización.' },
+        { q: '¿Puedo cancelar?', a: 'Si el servicio aún no se ha prestado, puedes pedir el reembolso dentro de los 30 días siguientes a la compra; se devuelve el valor menos el 10 %.' },
+        { q: '¿Cómo reservo?', a: 'Elige tu lección, la sede, la fecha y paga en línea. También puedes escribirnos por WhatsApp al +57 320 252 7842.' }
+      ]
+    };
+  }
+}
+
+return Component;};</script>
+<script>
+(function () {
+  var tpl = document.getElementById('tpl');
+  var app = document.getElementById('app');
+  var HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
+  var WHOLE = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+
+  function DCLogic(props) { this.props = props || {}; this.state = {}; }
+  DCLogic.prototype.setState = function (p) {
+    var next = typeof p === 'function' ? p(this.state, this.props) : p;
+    this.state = Object.assign({}, this.state, next);
+    schedule();
+  };
+  DCLogic.prototype.forceUpdate = function () { schedule(); };
+
+  var Component = window.__DC_DEFINE(DCLogic);
+  var comp = new Component(window.__DC_PROPS || {});
+  if (!comp.state) comp.state = {};
+
+  function lookup(path, scopes) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (path === 'null') return null;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    if (/^'.*'$|^".*"$/.test(path)) return path.slice(1, -1);
+    var parts = path.split('.');
+    for (var i = 0; i < scopes.length; i++) {
+      var s = scopes[i];
+      if (s && Object.prototype.hasOwnProperty.call(s, parts[0])) {
+        var v = s[parts[0]];
+        for (var j = 1; j < parts.length; j++) { if (v == null) return undefined; v = v[parts[j]]; }
+        return v;
+      }
+    }
+    return undefined;
+  }
+  function interp(str, scopes) {
+    return str.replace(HOLE, function (_, p) { var v = lookup(p, scopes); return v == null ? '' : String(v); });
+  }
+
+  function renderNodes(parent, scopes, out) {
+    var kids = parent.childNodes;
+    for (var i = 0; i < kids.length; i++) renderNode(kids[i], scopes, out);
+  }
+
+  function renderNode(node, scopes, out) {
+    if (node.nodeType === 3) {
+      var t = node.nodeValue;
+      out.push(document.createTextNode(t.indexOf('{{') >= 0 ? interp(t, scopes) : t));
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    var tag = node.localName;
+    if (tag === 'sc-if') {
+      var raw = node.getAttribute('value') || '';
+      var m = raw.match(WHOLE);
+      var val = m ? lookup(m[1], scopes) : raw;
+      if (val && val !== 'false') renderNodes(node, scopes, out);
+      return;
+    }
+    if (tag === 'sc-for') {
+      var lm = (node.getAttribute('list') || '').match(WHOLE);
+      var list = lm ? lookup(lm[1], scopes) : [];
+      var as = node.getAttribute('as') || 'item';
+      (list || []).forEach(function (item, idx) {
+        var sc = {}; sc[as] = item; sc.$index = idx;
+        renderNodes(node, [sc].concat(scopes), out);
+      });
+      return;
+    }
+    var el = node.namespaceURI === 'http://www.w3.org/1999/xhtml'
+      ? document.createElement(tag)
+      : document.createElementNS(node.namespaceURI, tag);
+    for (var a = 0; a < node.attributes.length; a++) {
+      var at = node.attributes[a];
+      var name = at.name, value = at.value;
+      if (name.indexOf('hint-') === 0) continue;
+      var whole = value.match(WHOLE);
+      if (/^on[a-z]+$/.test(name)) {
+        var fn = whole ? lookup(whole[1], scopes) : null;
+        if (typeof fn === 'function') {
+          var ev = name.slice(2);
+          if (ev === 'change' && (tag === 'input' || tag === 'textarea')) ev = 'input';
+          el.addEventListener(ev, fn);
+        }
+        continue;
+      }
+      if (whole) {
+        var v = lookup(whole[1], scopes);
+        if (v === false || v == null) {
+          if (name.indexOf('aria-') === 0 && v === false) el.setAttribute(name, 'false');
+          continue;
+        }
+        el.setAttribute(name, v === true ? (name.indexOf('aria-') === 0 ? 'true' : '') : String(v));
+      } else if (value.indexOf('{{') >= 0) {
+        el.setAttribute(name, interp(value, scopes));
+      } else {
+        el.setAttribute(name, value);
+      }
+    }
+    var children = [];
+    renderNodes(node, scopes, children);
+    for (var c = 0; c < children.length; c++) el.appendChild(children[c]);
+    if (tag === 'input' && el.hasAttribute('value')) el.value = el.getAttribute('value');
+    out.push(el);
+  }
+
+  var pending = false, first = true;
+  function schedule() {
+    if (pending) return;
+    pending = true;
+    Promise.resolve().then(function () { pending = false; render(); });
+  }
+
+  function render() {
+    var active = document.activeElement;
+    var activeId = active && active.id && app.contains(active) ? active.id : null;
+    var sel = null;
+    try { if (activeId && typeof active.selectionStart === 'number') sel = active.value.length - active.selectionStart; } catch (e) {}
+    var openDetails = Array.prototype.map.call(app.querySelectorAll('details'), function (d) { return d.open; });
+
+    var vals = comp.renderVals ? comp.renderVals() : {};
+    var out = [];
+    renderNodes(tpl.content, [vals], out);
+    app.replaceChildren.apply(app, out);
+
+    var ds = app.querySelectorAll('details');
+    if (ds.length === openDetails.length) ds.forEach(function (d, i) { if (openDetails[i]) d.open = true; });
+    if (activeId) {
+      var n = document.getElementById(activeId);
+      if (n) {
+        n.focus({ preventScroll: true });
+        try { if (sel != null && typeof n.setSelectionRange === 'function') { var p = n.value.length - sel; n.setSelectionRange(p, p); } } catch (e) {}
+      }
+    }
+    app.querySelectorAll('form').forEach(function (f) { f.addEventListener('submit', function (e) { e.preventDefault(); }); });
+    if (first) {
+      first = false;
+      if (comp.componentDidMount) try { comp.componentDidMount(); } catch (e) {}
+      if (location.hash && location.hash.length > 1) {
+        var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target) target.scrollIntoView();
+      }
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    var t = id && document.getElementById(id);
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
