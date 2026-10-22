@@ -58,6 +58,10 @@ header > a{min-width:0}
 }
 @media (max-width:400px){.mnav summary .mt{display:none}}
 .mnav-panel a.mnav-cta{justify-content:center;margin-top:16px;min-height:56px;background:#c8361b;color:#ffffff;box-shadow:none;font-size:18px}
+
+.ph{position:relative;overflow:hidden;background:#2a2925;margin:0}
+.ph > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ph .tag{position:absolute;left:12px;bottom:12px;margin:0;font-size:12px;font-weight:600;line-height:1.3;background:rgba(21,21,21,.8);color:#f2efe7;padding:5px 9px}
 </style>
 </head>
 <body>
@@ -118,11 +122,11 @@ header > a{min-width:0}
 <a href="lecciones.html" aria-current="page" style="color: #c8361b;">Lecciones</a>
 <a href="cursos.html">Cursos avanzados</a>
 <a href="certificaciones.html">Certificado DCCAE</a>
-<a href="guia-legal.html">Guía legal</a>
+<a href="aprende.html">Aprende</a>
 <a href="pagos.html">Pagos</a>
 </div>
 <a class="btn btn-red" href="reservar.html" style="min-height: 46px; padding: 0 22px;">Reservar</a>
-<details class="mnav"><summary aria-label="Abrir menú"><svg class="ic-m" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="2"></path></svg><svg class="ic-x" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2"></path></svg><span class="mt">Menú</span></summary><div class="mnav-panel"><a href="inicio.html">Inicio</a><a href="lecciones.html" aria-current="page">Lecciones de tiro</a><a href="cursos.html">Cursos avanzados</a><a href="certificaciones.html">Certificado DCCAE y membresías</a><a href="guia-legal.html">Guía legal</a><a href="pagos.html">Pagos y políticas</a><a href="gobierno.html">Gobierno</a><a class="mnav-cta" href="reservar.html">Reservar y pagar</a><a class="mnav-wa" href="https://wa.me/573202527842">WhatsApp +57 320 252 7842</a></div></details>
+<details class="mnav"><summary aria-label="Abrir menú"><svg class="ic-m" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="2"></path></svg><svg class="ic-x" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2"></path></svg><span class="mt">Menú</span></summary><div class="mnav-panel"><a href="inicio.html">Inicio</a><a href="lecciones.html" aria-current="page">Lecciones de tiro</a><a href="cursos.html">Cursos avanzados</a><a href="certificaciones.html">Certificado DCCAE y membresías</a><a href="aprende.html">Aprende</a><a href="pagos.html">Pagos y políticas</a><a href="gobierno.html">Gobierno</a><a class="mnav-cta" href="reservar.html">Reservar y pagar</a><a class="mnav-wa" href="https://wa.me/573202527842">WhatsApp +57 320 252 7842</a></div></details>
 </nav>
 </header>
 
@@ -151,17 +155,7 @@ header > a{min-width:0}
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr)); gap: 16px;">
 <sc-for list="{{items}}" as="s" hint-placeholder-count="7">
 <article style="display: flex; flex-direction: column; background: #ffffff;">
-<div style="position: relative; background: #151515; color: #f2efe7; padding: 32px 28px 22px; display: flex; flex-direction: column; gap: 22px; min-height: 236px; box-sizing: border-box;">
-<sc-if value="{{s.badge}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 0; right: 0; font-size: 13px; font-weight: 700; padding: 6px 12px; background: #c8361b; color: #ffffff;">{{s.badge}}</span></sc-if>
-<div style="display: flex; align-items: center; justify-content: center; gap: 18px; flex: 1;">
-<sc-for list="{{s.guns}}" as="g" hint-placeholder-count="1">
-<svg viewBox="{{g.vb}}" aria-hidden="true" style="width: {{g.w}}; height: auto; color: #f2efe7;"><use href="{{g.sym}}"></use></svg>
-</sc-for>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 5px;" role="img" aria-label="{{s.ammoLabel}}">
-<sc-for list="{{s.rounds}}" as="r" hint-placeholder-count="8"><svg viewBox="0 0 30 90" width="13" height="39" aria-hidden="true"><use href="{{r.sym}}"></use></svg></sc-for>
-</div>
-</div>
+<div class="ph" style="aspect-ratio: 4 / 3;"><img src="{{s.photo}}" alt="{{s.alt}}" loading="lazy" decoding="async"><sc-if value="{{s.badge}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 0; right: 0; font-size: 13px; font-weight: 700; padding: 6px 12px; background: #c8361b; color: #ffffff;">{{s.badge}}</span></sc-if><p class="tag">Imagen ilustrativa · {{s.ammoLabel}}</p></div>
 <div style="padding: 28px; display: flex; flex-direction: column; gap: 14px; flex: 1;">
 <p style="margin: 0; font-size: 14px; font-weight: 700; color: #57534b;">{{s.tag}}</p>
 <h3 class="d" style="margin: 0; font-size: 40px;">{{s.name}}</h3>
@@ -198,14 +192,7 @@ header > a{min-width:0}
 <p style="margin: 0; display: flex; align-items: baseline; gap: 12px;"><span class="d" style="font-size: 52px;">$169.900</span><span style="color: #cfcabe;">PDW Kit Roni Táctico · 9 cartuchos</span></p>
 <a class="btn btn-red" href="reservar.html">Reservar Kit Roni</a>
 </div>
-<figure style="grid-column: 7 / span 6; margin: 0;">
-<svg viewBox="0 0 420 160" role="img" aria-label="Silueta de la pistola Córdova convertida en carabina con el Kit Roni" style="width: 100%; height: auto; color: #f2efe7;"><use href="#roni"></use></svg>
-<figcaption style="margin-top: 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; font-size: 15px;">
-<span style="padding: 14px; background: #232320;">Culata plegable</span>
-<span style="padding: 14px; background: #232320;">Apoyo al hombro</span>
-<span style="padding: 14px; background: #232320;">Mayor alcance</span>
-</figcaption>
-</figure>
+<div style="grid-column: 7 / span 6; display: flex; flex-direction: column; gap: 4px;"><figure class="ph" style="aspect-ratio: 4 / 3;"><img src="https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-3c7b9a060eb846ce9e5f55c8cee559a2/assets/5724a227-2fd5-4fcf-b030-fe6145952a57.png" alt="Tirador apuntando una pistola con kit de conversión a carabina plegable" loading="lazy" decoding="async"><figcaption class="tag">Imagen ilustrativa</figcaption></figure><div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; font-size: 15px;"><span style="padding: 14px; background: #232320;">Culata plegable</span><span style="padding: 14px; background: #232320;">Apoyo al hombro</span><span style="padding: 14px; background: #232320;">Mayor alcance</span></div></div>
 </div>
 </section>
 
@@ -266,13 +253,13 @@ class Component extends DCLogic {
     const small = (g) => Object.assign({}, g, { w: g.sym === '#shotgun' ? '170px' : '96px' });
     const R = (n, sym) => Array.from({ length: n }, () => ({ sym }));
     const ALL = [
-      { cat: 'basico', tag: 'Nivel I · Básico', name: 'Revólver .38', price: '$131.900', guns: [G.r], rounds: R(5, '#bullet'), ammoLabel: '5 cartuchos incluidos', desc: 'Tu primera experiencia con arma de fuego, con el revólver Scorpio INDUMIL .38 Special.', inc: ['Instructor COSECAD · Thor', '5 cartuchos .38 Special', 'Teoría de seguridad y partes del arma', 'Práctica de principios de tiro'], dur: '1 a 1:30 h', who: 'Principiantes y civiles' },
-      { cat: 'basico', tag: 'Nivel I · Básico', badge: 'La más solicitada', name: 'Pistola 9 mm', price: '$149.900', guns: [G.p], rounds: R(8, '#bullet'), ammoLabel: '8 cartuchos incluidos', desc: 'Pistola Córdova INDUMIL 9 mm, una de las más usadas en seguridad y defensa en Colombia.', inc: ['Instructor COSECAD · Thor', '8 cartuchos 9 mm', 'Teoría de seguridad y partes técnicas', 'Postura, mira y gatillo'], dur: '1 a 1:30 h', who: 'Principiantes con permiso de porte' },
-      { cat: 'basico', tag: 'Nivel I · Básico', name: 'Escopeta cal. 12', price: '$111.900', guns: [G.s], rounds: R(5, '#shell'), ammoLabel: '5 cartuchos incluidos', desc: 'Escopeta Hatsan calibre 12 de acción de bombeo, para una experiencia intensa.', inc: ['Instructor COSECAD · Thor', '5 cartuchos calibre 12', 'Teoría de seguridad y partes', 'Postura y manejo del retroceso'], dur: '1 a 1:30 h', who: 'Civiles' },
-      { cat: 'combos', tag: 'Combo', name: 'Pistola + Revólver', price: '$172.900', guns: [small(G.p), small(G.r)], rounds: R(6, '#bullet').concat(R(4, '#bullet')), ammoLabel: '10 cartuchos incluidos', desc: 'Compara en una sola sesión las dos armas cortas más usadas.', inc: ['Instructor COSECAD · Thor', '6 cartuchos 9 mm y 4 de .38', 'Teoría de diferencias técnicas', 'Práctica en ambas plataformas'], dur: '1:30 h', who: 'Quien quiere comparar plataformas' },
-      { cat: 'combos', tag: 'Combo', badge: 'Ideal para grupos', name: '3 Gun', price: '$154.900', guns: [small(G.p), small(G.r), small(G.s)], rounds: R(6, '#bullet').concat(R(3, '#shell')), ammoLabel: '9 cartuchos incluidos', desc: 'Pistola, revólver y escopeta en una sola sesión.', inc: ['Instructor COSECAD · Thor', '3 cartuchos por cada arma', 'Seguridad en las tres plataformas', 'Principios de tiro en cada una'], dur: '1:30 h', who: 'Grupos y amigos' },
-      { cat: 'elite', tag: 'Élite · Premium', badge: 'El más completo', name: '3 Gun Élite', price: '$261.900', guns: [small(G.p), small(G.r), small(G.s)], rounds: R(11, '#bullet').concat(R(4, '#shell')), ammoLabel: '15 cartuchos incluidos', desc: 'Más munición y análisis técnico de tu desempeño.', inc: ['Instructor senior COSECAD · Thor', '7 de pistola, 4 de revólver y 4 de escopeta', 'Teoría técnica avanzada', 'Tiro de precisión y cadencia'], dur: '1:30 a 2 h', who: 'Quien quiere la experiencia completa' },
-      { cat: 'roni', tag: 'Kit Roni · Nuevo 2026', badge: 'Exclusivo en Colombia', name: 'PDW Kit Roni Táctico', price: '$169.900', guns: [G.k], rounds: R(9, '#bullet'), ammoLabel: '9 cartuchos incluidos', desc: 'La pistola Córdova 9 mm convertida en carabina táctica plegable.', inc: ['Instructor táctico COSECAD', '9 cartuchos 9 mm INDUMIL', 'Distancia de tiro de 10 a 25 m'], dur: 'Consultar', who: 'Escoltas, seguridad privada y civiles avanzados' }
+      { cat: 'basico', tag: 'Nivel I · Básico', name: 'Revólver .38', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-35d02af7fc2548aba900f8b5f3d2acde/assets/5bffa77b-5feb-4fe9-bad8-ee711cea12c9.png', alt: 'Alumna disparando un revólver .38 guiada por un instructor', price: '$131.900', guns: [G.r], rounds: R(5, '#bullet'), ammoLabel: '5 cartuchos incluidos', desc: 'Tu primera experiencia con arma de fuego, con el revólver Scorpio INDUMIL .38 Special.', inc: ['Instructor COSECAD · Thor', '5 cartuchos .38 Special', 'Teoría de seguridad y partes del arma', 'Práctica de principios de tiro'], dur: '1 a 1:30 h', who: 'Principiantes y civiles' },
+      { cat: 'basico', tag: 'Nivel I · Básico', badge: 'La más solicitada', name: 'Pistola 9 mm', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-66698e3fa13d487da942afe737ba55c0/assets/96cee728-b1ad-4f59-96e8-fd668793d860.png', alt: 'Persona disparando una pistola 9 mm en una línea de tiro cubierta', price: '$149.900', guns: [G.p], rounds: R(8, '#bullet'), ammoLabel: '8 cartuchos incluidos', desc: 'Pistola Córdova INDUMIL 9 mm, una de las más usadas en seguridad y defensa en Colombia.', inc: ['Instructor COSECAD · Thor', '8 cartuchos 9 mm', 'Teoría de seguridad y partes técnicas', 'Postura, mira y gatillo'], dur: '1 a 1:30 h', who: 'Principiantes con permiso de porte' },
+      { cat: 'basico', tag: 'Nivel I · Básico', name: 'Escopeta cal. 12', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-50419d64b08c475aa284012d09f1cc96/assets/d01fd7ad-68ee-4213-8107-87005e552b59.png', alt: 'Tirador disparando una escopeta de bombeo en campo abierto', price: '$111.900', guns: [G.s], rounds: R(5, '#shell'), ammoLabel: '5 cartuchos incluidos', desc: 'Escopeta Hatsan calibre 12 de acción de bombeo, para una experiencia intensa.', inc: ['Instructor COSECAD · Thor', '5 cartuchos calibre 12', 'Teoría de seguridad y partes', 'Postura y manejo del retroceso'], dur: '1 a 1:30 h', who: 'Civiles' },
+      { cat: 'combos', tag: 'Combo', name: 'Pistola + Revólver', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-fd4b97b4ec384d5fb3de02bf5e69f70d/assets/a52c05a9-b38d-4791-be2c-2ed8339f59f4.png', alt: 'Pistola 9 mm y revólver .38 sobre la mesa de tiro', price: '$172.900', guns: [small(G.p), small(G.r)], rounds: R(6, '#bullet').concat(R(4, '#bullet')), ammoLabel: '10 cartuchos incluidos', desc: 'Compara en una sola sesión las dos armas cortas más usadas.', inc: ['Instructor COSECAD · Thor', '6 cartuchos 9 mm y 4 de .38', 'Teoría de diferencias técnicas', 'Práctica en ambas plataformas'], dur: '1:30 h', who: 'Quien quiere comparar plataformas' },
+      { cat: 'combos', tag: 'Combo', badge: 'Ideal para grupos', name: '3 Gun', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-8db88038e40741a99a38eccbd37d2251/assets/77b31421-2f09-49bb-b2df-55911e87f4be.png', alt: 'Grupo de amigos en la línea de tiro con un instructor', price: '$154.900', guns: [small(G.p), small(G.r), small(G.s)], rounds: R(6, '#bullet').concat(R(3, '#shell')), ammoLabel: '9 cartuchos incluidos', desc: 'Pistola, revólver y escopeta en una sola sesión.', inc: ['Instructor COSECAD · Thor', '3 cartuchos por cada arma', 'Seguridad en las tres plataformas', 'Principios de tiro en cada una'], dur: '1:30 h', who: 'Grupos y amigos' },
+      { cat: 'elite', tag: 'Élite · Premium', badge: 'El más completo', name: '3 Gun Élite', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-6c3d500d205c4b8fafc3510643bdc5df/assets/5d524f32-a6ef-4e18-be5f-3e04fbd34f3d.png', alt: 'Instructor analizando con un alumno su agrupación de disparos', price: '$261.900', guns: [small(G.p), small(G.r), small(G.s)], rounds: R(11, '#bullet').concat(R(4, '#shell')), ammoLabel: '15 cartuchos incluidos', desc: 'Más munición y análisis técnico de tu desempeño.', inc: ['Instructor senior COSECAD · Thor', '7 de pistola, 4 de revólver y 4 de escopeta', 'Teoría técnica avanzada', 'Tiro de precisión y cadencia'], dur: '1:30 a 2 h', who: 'Quien quiere la experiencia completa' },
+      { cat: 'roni', tag: 'Kit Roni · Nuevo 2026', badge: 'Exclusivo en Colombia', name: 'PDW Kit Roni Táctico', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-3c7b9a060eb846ce9e5f55c8cee559a2/assets/5724a227-2fd5-4fcf-b030-fe6145952a57.png', alt: 'Tirador con kit de conversión a carabina en una pista cubierta', price: '$169.900', guns: [G.k], rounds: R(9, '#bullet'), ammoLabel: '9 cartuchos incluidos', desc: 'La pistola Córdova 9 mm convertida en carabina táctica plegable.', inc: ['Instructor táctico COSECAD', '9 cartuchos 9 mm INDUMIL', 'Distancia de tiro de 10 a 25 m'], dur: 'Consultar', who: 'Escoltas, seguridad privada y civiles avanzados' }
     ];
     const CH = [['todos', 'Todos'], ['basico', 'Nivel básico'], ['combos', 'Combos'], ['elite', 'Élite'], ['roni', 'Kit Roni']];
     return {

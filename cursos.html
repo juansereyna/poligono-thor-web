@@ -68,6 +68,10 @@ header > a{min-width:0}
 }
 @media (max-width:400px){.mnav summary .mt{display:none}}
 .mnav-panel a.mnav-cta{justify-content:center;margin-top:16px;min-height:56px;background:#c8361b;color:#ffffff;box-shadow:none;font-size:18px}
+
+.ph{position:relative;overflow:hidden;background:#2a2925;margin:0}
+.ph > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ph .tag{position:absolute;left:12px;bottom:12px;margin:0;font-size:12px;font-weight:600;line-height:1.3;background:rgba(21,21,21,.8);color:#f2efe7;padding:5px 9px}
 </style>
 </head>
 <body>
@@ -87,11 +91,11 @@ header > a{min-width:0}
 <a href="lecciones.html">Lecciones</a>
 <a href="cursos.html" aria-current="page" style="color: #c8361b;">Cursos avanzados</a>
 <a href="certificaciones.html">Certificado DCCAE</a>
-<a href="guia-legal.html">Guía legal</a>
+<a href="aprende.html">Aprende</a>
 <a href="pagos.html">Pagos</a>
 </div>
 <a class="btn btn-red" href="reservar.html" style="min-height: 46px; padding: 0 22px;">Reservar</a>
-<details class="mnav"><summary aria-label="Abrir menú"><svg class="ic-m" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="2"></path></svg><svg class="ic-x" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2"></path></svg><span class="mt">Menú</span></summary><div class="mnav-panel"><a href="inicio.html">Inicio</a><a href="lecciones.html">Lecciones de tiro</a><a href="cursos.html" aria-current="page">Cursos avanzados</a><a href="certificaciones.html">Certificado DCCAE y membresías</a><a href="guia-legal.html">Guía legal</a><a href="pagos.html">Pagos y políticas</a><a href="gobierno.html">Gobierno</a><a class="mnav-cta" href="reservar.html">Reservar y pagar</a><a class="mnav-wa" href="https://wa.me/573202527842">WhatsApp +57 320 252 7842</a></div></details>
+<details class="mnav"><summary aria-label="Abrir menú"><svg class="ic-m" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="2"></path></svg><svg class="ic-x" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2"></path></svg><span class="mt">Menú</span></summary><div class="mnav-panel"><a href="inicio.html">Inicio</a><a href="lecciones.html">Lecciones de tiro</a><a href="cursos.html" aria-current="page">Cursos avanzados</a><a href="certificaciones.html">Certificado DCCAE y membresías</a><a href="aprende.html">Aprende</a><a href="pagos.html">Pagos y políticas</a><a href="gobierno.html">Gobierno</a><a class="mnav-cta" href="reservar.html">Reservar y pagar</a><a class="mnav-wa" href="https://wa.me/573202527842">WhatsApp +57 320 252 7842</a></div></details>
 </nav>
 </header>
 
@@ -123,14 +127,7 @@ header > a{min-width:0}
 <div style="display: flex; flex-wrap: wrap; gap: 12px;"><a class="btn btn-red" href="https://wa.me/573202527842?text=Hola%2C%20quiero%20la%20pr%C3%B3xima%20fecha%20del%20curso%20de%20manejo%20evasivo.">Consultar próxima fecha</a></div>
 </div>
 <div style="grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 4px;">
-<svg viewBox="0 0 520 220" role="img" aria-label="Esquema de maniobra evasiva: vehículo que gira en J para salir de una emboscada" style="width: 100%; height: auto; background: #232320; display: block;">
-<path d="M40 170 H 300 Q 380 170 380 110 Q 380 50 300 50 H 200" fill="none" stroke="#c8361b" stroke-width="5" stroke-dasharray="2 12" stroke-linecap="round"></path>
-<g transform="translate(160 32)"><rect width="64" height="36" rx="6" fill="#f2efe7"></rect><rect x="40" y="6" width="14" height="24" fill="#151515" opacity="0.5"></rect></g>
-<path d="M200 50 l-14 -8 v16 z" fill="#c8361b"></path>
-<g transform="translate(440 150)" fill="#cfcabe"><rect width="40" height="40"></rect><rect x="-60" y="0" width="40" height="40"></rect></g>
-<text x="40" y="206" font-family="Archivo, sans-serif" font-size="15" font-weight="600" fill="#cfcabe">Inicio</text>
-<text x="420" y="206" font-family="Archivo, sans-serif" font-size="15" font-weight="600" fill="#cfcabe">Bloqueo</text>
-</svg>
+<figure class="ph" style="aspect-ratio: 16 / 9;"><img src="https://static.youart.ai/media/workflows/ad7ff356-66fa-4aa8-8fe8-eeeb56c3796f/nodes/node-5b7ce5e34aa847e6a523eec4ad1f5609/assets/9b949cbb-308b-4054-964e-69f57efc66d9.png" alt="Toma aérea de un vehículo haciendo un giro evasivo en una pista de entrenamiento" loading="lazy" decoding="async"><figcaption class="tag">Imagen ilustrativa · ejercicio de evasión</figcaption></figure>
 <div class="cols4" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px;">
 <sc-for list="{{modules}}" as="m" hint-placeholder-count="6">
 <div style="padding: 16px 18px; background: #232320;"><p style="margin: 0; font-size: 16px; font-weight: 700;">{{m.t}}</p><p style="margin: 2px 0 0; font-size: 14px; color: #cfcabe;">{{m.d}}</p></div>
@@ -149,23 +146,19 @@ header > a{min-width:0}
 </sc-for>
 </div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 4px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr)); gap: 16px;">
 <sc-for list="{{items}}" as="s" hint-placeholder-count="9">
-<details style="background: #ffffff;">
-<summary class="row" style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 2fr) 32px; gap: 24px; align-items: center; padding: 26px 28px; min-height: 64px;">
-<span style="display: flex; flex-direction: column; gap: 4px;"><span class="d" style="font-size: 28px;">{{s.name}}</span><span style="font-size: 15px; color: #57534b;">{{s.tag}}</span></span>
-<span class="hide-m" style="font-size: 16px;">{{s.meta}}</span>
-<span class="hide-m" style="font-size: 15px; font-weight: 700; color: {{s.badgeColor}};">{{s.badge}}</span>
-<span class="mk" aria-hidden="true" style="font-size: 32px; font-weight: 400; text-align: right;">+</span>
-</summary>
-<div class="g12" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; padding: 0 28px 32px;">
-<p style="grid-column: 1 / span 7; margin: 0;">{{s.desc}}</p>
-<div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
-<p style="margin: 0; font-size: 15px; color: #57534b;">Precio y fechas por cohorte</p>
-<a class="btn" href="{{s.wa}}">Consultar este curso</a>
+<article style="display: flex; flex-direction: column; background: #ffffff;">
+<div class="ph" style="aspect-ratio: 16 / 9;"><img src="{{s.photo}}" alt="{{s.alt}}" loading="lazy" decoding="async"><p class="tag">Imagen ilustrativa</p>
+<sc-if value="{{s.badge}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 0; right: 0; font-size: 13px; font-weight: 700; padding: 6px 12px; background: #c8361b; color: #ffffff;">{{s.badge}}</span></sc-if></div>
+<div style="padding: 26px 28px 30px; display: flex; flex-direction: column; gap: 12px; flex: 1;">
+<p style="margin: 0; font-size: 14px; font-weight: 700; color: #57534b;">{{s.tag}}</p>
+<h3 class="d" style="margin: 0; font-size: 30px;">{{s.name}}</h3>
+<p style="margin: 0; font-size: 17px;">{{s.desc}}</p>
+<p style="margin: 0; font-size: 15px; color: #57534b;">{{s.meta}}</p>
+<a class="btn" href="{{s.wa}}" style="margin-top: auto; align-self: flex-start;">Consultar fechas y precio</a>
 </div>
-</div>
-</details>
+</article>
 </sc-for>
 </div>
 </section>
@@ -204,16 +197,16 @@ class Component extends DCLogic {
   renderVals() {
     const cat = this.state.cat;
     const ALL = [
-      { cat: 'tactico', tag: 'Especialización · Arma corta', badge: 'El más completo', name: 'Especialista en ambientes hostiles', meta: '8 a 9 h · 100 cartuchos 9 mm', desc: 'El programa más completo de Thor en una sola jornada: pistola avanzada, CQB, manejo evasivo en vehículo, armería y TCCC. Incluye 100 cartuchos 9 mm y diploma Thor.' },
-      { cat: 'vehicular', tag: 'Curso estrella · Vehicular + pistola', badge: 'Curso estrella', name: 'Manejo de vehículo en acción defensiva y evasiva', meta: 'Suesca · requiere licencia', desc: 'Conducción táctica evasiva con pistola real y traumática: maniobras, mecánica, manejo de riesgo y situaciones reales. Certificado DCCAE y de manejo.' },
-      { cat: 'auxilios', tag: 'Primeros auxilios · Táctico', name: 'Primeros auxilios tácticos', meta: '5 módulos · 8 a 9 h', desc: 'Atención de heridos en escenarios hostiles: protocolo MARCH, control de hemorragias, vía aérea y evacuación táctica. Para escoltas y personal de seguridad. Curso certificado.' },
-      { cat: 'auxilios', tag: 'Primeros auxilios · Tránsito', name: 'Primeros auxilios en accidentes de tránsito', meta: 'Curso certificado', desc: 'Atención prehospitalaria en escenarios vehiculares: evaluación primaria, inmovilización, extracción del vehículo y soporte vital básico.' },
-      { cat: 'pistola', tag: 'Pistola · Avanzado', name: 'Fundamentos avanzados con pistola', meta: 'Fechas programadas', desc: 'Velocidad de extracción, tiro de precisión, blancos múltiples, recarga táctica y tiro en movimiento.' },
-      { cat: 'pistola', tag: 'Instructor · Certificación', name: 'Programa instructor de tiro con pistola', meta: '3 días intensivos', desc: 'Formación para certificarte como instructor: metodología de enseñanza, seguridad en el polígono y técnica avanzada. Certificación DCCAE.' },
-      { cat: 'tactico', tag: 'Defensa en el hogar · Ley 2197', name: 'Protección en el hogar: despeje de habitaciones', meta: 'Fechas programadas', desc: 'CQB residencial con pistola: despeje de habitaciones, sectores de tiro, esquinas y pasillos.' },
-      { cat: 'vehicular', tag: 'Táctica vehicular · Ley 2197', name: 'Protección en el vehículo con pistola', meta: 'Fechas programadas', desc: 'Tiro desde y alrededor del vehículo, la carrocería como cobertura, extracción rápida y respuesta a contacto vehicular.' },
-      { cat: 'armeria', tag: 'Armería · Nivel 1', name: 'Arme, desarme y limpieza de armas', meta: 'Fechas programadas', desc: 'Despiece, función de cada componente, limpieza y lubricación correctas para la seguridad y la vida útil del arma.' },
-      { cat: 'tactico', tag: 'Simulación · Táctica', name: 'Simulador de tiro', meta: 'Sin munición real', desc: 'Escenarios programados que evalúan decisión de tiro, precisión y reacción ante amenazas, sin consumir munición.' }
+      { cat: 'tactico', tag: 'Especialización · Arma corta', badge: 'El más completo', name: 'Especialista en ambientes hostiles', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-b43b640d9db04b19a974ee018419886c/assets/08a75042-eeb3-4606-9c51-767298441c95.png', alt: 'Alumno practicando con pistola detrás de una barricada junto a su instructor', meta: '8 a 9 h · 100 cartuchos 9 mm', desc: 'El programa más completo de Thor en una sola jornada: pistola avanzada, CQB, manejo evasivo en vehículo, armería y TCCC. Incluye 100 cartuchos 9 mm y diploma Thor.' },
+      { cat: 'vehicular', tag: 'Curso estrella · Vehicular + pistola', badge: 'Curso estrella', name: 'Manejo de vehículo en acción defensiva y evasiva', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-ea89d1e1ea10416293c3947fd9b7081a/assets/96a4ab23-b7c7-4f70-a26d-18d56439e4f0.png', alt: 'Camioneta frenando y esquivando conos en una pista de manejo', meta: 'Suesca · requiere licencia', desc: 'Conducción táctica evasiva con pistola real y traumática: maniobras, mecánica, manejo de riesgo y situaciones reales. Certificado DCCAE y de manejo.' },
+      { cat: 'auxilios', tag: 'Primeros auxilios · Táctico', name: 'Primeros auxilios tácticos', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-c9093e17644d4718ae11b5fe25edadf4/assets/b0455ed0-ee33-413c-bc43-646bae8b1455.png', alt: 'Alumnos practicando la aplicación de un torniquete', meta: '5 módulos · 8 a 9 h', desc: 'Atención de heridos en escenarios hostiles: protocolo MARCH, control de hemorragias, vía aérea y evacuación táctica. Para escoltas y personal de seguridad. Curso certificado.' },
+      { cat: 'auxilios', tag: 'Primeros auxilios · Tránsito', name: 'Primeros auxilios en accidentes de tránsito', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-0c807384948f4ad18e539272b27297e8/assets/8b471c38-a3c6-4953-b3da-71d02102c0e0.png', alt: 'Alumnos poniendo un collar cervical a un voluntario dentro de un carro', meta: 'Curso certificado', desc: 'Atención prehospitalaria en escenarios vehiculares: evaluación primaria, inmovilización, extracción del vehículo y soporte vital básico.' },
+      { cat: 'pistola', tag: 'Pistola · Avanzado', name: 'Fundamentos avanzados con pistola', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-de9bd3d6618d4406a871a97592b5c524/assets/53306e8e-f1f5-447c-94d0-b0bc89887a29.png', alt: 'Tirador desenfundando una pistola en una pista cubierta', meta: 'Fechas programadas', desc: 'Velocidad de extracción, tiro de precisión, blancos múltiples, recarga táctica y tiro en movimiento.' },
+      { cat: 'pistola', tag: 'Instructor · Certificación', name: 'Programa instructor de tiro con pistola', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-3304601c70e1473285c232f3561ae5e2/assets/768a8101-5ec2-48da-89ed-e94289e1e0d7.png', alt: 'Instructor dando clase a un grupo de alumnos', meta: '3 días intensivos', desc: 'Formación para certificarte como instructor: metodología de enseñanza, seguridad en el polígono y técnica avanzada. Certificación DCCAE.' },
+      { cat: 'tactico', tag: 'Defensa en el hogar · Ley 2197', name: 'Protección en el hogar: despeje de habitaciones', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-e1aef20bb8ba4017a831f2d2ed2dda6f/assets/bf0d71b9-6505-4bb1-9b9f-fbea54ecc1d9.png', alt: 'Alumno practicando despeje de una puerta con un arma de entrenamiento', meta: 'Fechas programadas', desc: 'CQB residencial con pistola: despeje de habitaciones, sectores de tiro, esquinas y pasillos.' },
+      { cat: 'vehicular', tag: 'Táctica vehicular · Ley 2197', name: 'Protección en el vehículo con pistola', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-2c1567f57bc74176b2b9642c791c2f25/assets/daa6865e-f083-45cc-a779-903ed260d302.png', alt: 'Alumno disparando protegido detrás del motor de un carro', meta: 'Fechas programadas', desc: 'Tiro desde y alrededor del vehículo, la carrocería como cobertura, extracción rápida y respuesta a contacto vehicular.' },
+      { cat: 'armeria', tag: 'Armería · Nivel 1', name: 'Arme, desarme y limpieza de armas', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-7c17d4ca25a241ae940535a6d3083b1e/assets/82c52e15-8c10-4084-a81f-0fb5c4a23a0c.png', alt: 'Manos limpiando una pistola desarmada sobre una mesa de armería', meta: 'Fechas programadas', desc: 'Despiece, función de cada componente, limpieza y lubricación correctas para la seguridad y la vida útil del arma.' },
+      { cat: 'tactico', tag: 'Simulación · Táctica', name: 'Simulador de tiro', photo: 'https://static.youart.ai/media/workflows/5bdefe4b-1858-4d73-a09b-862a36708b87/nodes/node-534b53f965524aeb8111cde7c8c69ab6/assets/93d65f4e-3888-419b-8fce-d453d2e1369e.png', alt: 'Alumno frente a la pantalla del simulador de tiro', meta: 'Sin munición real', desc: 'Escenarios programados que evalúan decisión de tiro, precisión y reacción ante amenazas, sin consumir munición.' }
     ];
     const CH = [['todos', 'Todos'], ['tactico', 'Táctico'], ['auxilios', 'Primeros auxilios'], ['pistola', 'Pistola'], ['vehicular', 'Vehicular'], ['armeria', 'Armería']];
     return {
